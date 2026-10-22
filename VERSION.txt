@@ -1,0 +1,4 @@
+Mangold App Version 2
+Stand: 22. Oktober 2026
+Gestaltungsentwurf mit künstlichen Testdaten.
+Sprache und KI sind Demonstrationen. Speicherung erfolgt lokal im Browser.

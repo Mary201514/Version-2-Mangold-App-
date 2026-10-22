@@ -1,0 +1,20 @@
+Mangold App Version 2 – Bereitstellung am 22. Oktober 2026
+
+Live-Vorschau:
+https://mangold-app-version-2.vercel.app/
+
+Vercel-Projekt:
+https://vercel.com/mangold-maria/mangold-app-version-2
+
+GitHub-Ziel:
+https://github.com/Mary201514/Version-2-Mangold-App-
+
+Die Erstbereitstellung erfolgte als direkter Upload der drei statischen
+App-Dateien aus dist. GitHub ist damit noch nicht automatisch mit Vercel
+für spätere Bereitstellungen verbunden.
+
+Aufruf der veröffentlichten Startseite im Browser geprüft.
+Keine Supabase-Anbindung eingerichtet. Keine echte KI oder Spracheingabe.
+Die App verwendet weiterhin ausschließlich lokalen Browser-Speicher.
+Der Projektstand aus dem ersten Entwurf dokumentiert die damaligen Tests;
+diese Datei ergänzt die spätere Veröffentlichung auf ausdrücklichen Wunsch.

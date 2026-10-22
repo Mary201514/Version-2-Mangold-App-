@@ -1,0 +1,43 @@
+Mangold Service-Assistent – lokaler Gestaltungsentwurf
+Stand: 22. Oktober 2026
+
+Grundlage: Projektregeln aus diesem Chat, Papierprototyp aus dem
+referenzierten Chat und Firmenfarben #2562B0 / #AEB8DF.
+
+Umgesetzt zur Abstimmung:
+- Startseite nach Papierprototyp, Auswahl vorhandener Auftrag / neuer Einsatz.
+- Künstliche Auftragsliste, kompakte Übersicht, Dokumentation starten.
+- Ein gemeinsamer Assistent für Befund, Arbeiten, Material, Zeiten und km.
+- Sprachablauf ausschließlich als ausdrücklich gekennzeichnete Demo.
+- Manueller Text, unveränderter Originaltext, bearbeitbare Prüfansicht.
+- Ein lokal gespeicherter Entwurf mit sichtbarem Speicherzustand.
+- Inspektion als Platzhalter, keine erfundenen Prüfprotokolle.
+
+Durchgeführte Prüfungen:
+- JavaScript-Syntaxprüfung bestanden.
+- Lokaler Server liefert HTTP 200.
+- Browser: Dokumentation, Dialog für Sprachdemo, Beispiel einsetzen,
+  Prüfansicht, Arbeitszeit bearbeiten, speichern und neu laden geprüft.
+- Die geänderte Arbeitszeit blieb nach dem Neuladen erhalten.
+- Darstellung im schmalen Seitenfenster angesehen.
+- Tabletansicht mit 1024 x 768 versucht; die Seitenansicht wurde dabei
+  abgeschnitten. Eine verlässliche Tablet-Abnahme steht noch aus.
+
+Offen / Einschränkungen:
+- Freigabe der neuen Dokumentationsansicht und Test durch Monteure.
+- Echte Spracheingabe, KI-Zuordnung und Textvorschläge noch nicht aktiv.
+- Pflichtfelder, vollständige Offline-Nutzung, Rechte, Datensicherung und
+  Aufbewahrung vor betrieblichem Einsatz abstimmen und umsetzen.
+- Keine Anmeldung, keine Synchronisation und keine ERP-Verbindung.
+- Keine Verwaltung mehrerer gespeicherter Entwürfe.
+- Keine Tests für parallele Bearbeitung, Synchronisationskonflikte,
+  Übertragungswiederholungen oder Zugriffsrechte; noch nicht implementiert.
+- Browser-Speicher ist keine betriebliche Datensicherung.
+- Keine Veröffentlichung; ausschließlich künstliche Testdaten.
+
+Start im Projektordner:
+node server.cjs
+Anschließend http://127.0.0.1:4173/#dokumentation öffnen.
+
+Vorhandene Projektregeln haben Vorrang. Eine neue Phase beginnt erst
+nach ausreichender Prüfung und ausdrücklicher Freigabe durch die Nutzerin.
