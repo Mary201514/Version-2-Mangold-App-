@@ -1,0 +1,42 @@
+Mangold App Version 2 – Ergänzungen vom 23. Oktober 2026
+
+Umgesetzt auf Nutzerwunsch:
+- Echtes Logo aus der bereitgestellten Mangold-Vorlage.
+- Startseite: Neuer AD erstellen statt Meine Entwürfe; Einstieg zum neuen Einsatz.
+- Startseite: Prüfprotokolle auswählen, nach Anlage/Bereich filtern und suchen.
+- Alle 31 gelieferten Vorlagen mit insgesamt 69 Seiten verfügbar.
+- Protokolle dem ausgewählten Einsatz zuordnen, Text und Häkchen auf den
+  Originalseiten setzen, ändern, positionieren und entfernen.
+- Auf Gerät speichern und später weiter ausfüllen.
+- PDF-Download mit interaktiven Textfeldern und Checkboxen.
+- Auftragsübersicht: Wichtige Informationen, Einsatzadresse und Routenfenster.
+- Google Maps öffnet erst nach Betätigung des ausdrücklich beschrifteten Links;
+  die App lädt keine Karten oder Standortdaten im Hintergrund.
+- Vorbelegten Prüfernamen in der App-Kopie nach Nutzerfreigabe entfernt.
+  Die bereitgestellten Originaldateien außerhalb des Projekts sind unverändert.
+
+Geprüft:
+- 31 Vorlagen und 69 Originalseiten als Kontaktübersichten visuell angesehen.
+- JavaScript-Syntax und statischer Build.
+- Browser: Protokollsuche, Auswahl, Zuordnung, Text, Häkchen und Seitenwechsel.
+- Protokoll speichern, Seite neu laden und erneut öffnen.
+- Download eines zweiseitigen ausgefüllten Protokolls im Browser.
+- PDF-Daten: kanonische AcroForm-Felder, Werte und Widget-Appearances vorhanden;
+  Testtext unverändert, Checkbox gesetzt, Seitenanzahl unverändert.
+- Export mit Poppler visuell geprüft.
+- Wichtige Informationen und Zieladresse bleiben nach Speichern/Neuladen erhalten.
+- Routenlink enthält die korrekt kodierte Zieladresse. Keine Testnavigation
+  zu einer fiktiven Adresse ausgelöst.
+
+Grenzen:
+- Keine fachliche Freigabe der Prüfprotokolle oder automatische Bewertung.
+- Felder werden manuell auf den Originalseiten positioniert.
+- Der Katalog lädt die Vorlagen beim Öffnen; vollständiger Offline-Abruf
+  sämtlicher Vorlagen ist noch nicht umgesetzt.
+- Lokale Speicherung, weiterhin keine Supabase- oder ERP-Anbindung.
+- Echte Spracheingabe/KI unverändert noch nicht aktiv.
+- Vor betrieblichem Einsatz fehlen weiterhin Rechte, Sicherung, Pflichtfelder
+  und Erprobung durch Monteure auf den tatsächlich verwendeten Tablets.
+
+Abhängigkeit: pdf-lib (MIT-Lizenz), mitgelieferte lokale Browserbibliothek.
+Keine zusätzlichen Netzwerkdienste zur PDF-Verarbeitung.

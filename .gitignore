@@ -3,3 +3,10 @@ dist/
 .env
 .env.*
 !.env.example
+tmp/
+output/
+*.jpg
+!assets/**/*.jpg
+inspect_templates.py
+render_templates.py
+prepare_protocols.py
