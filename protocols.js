@@ -33,5 +33,5 @@ async function buildProtocolPdf(record){const template=protocolById(record.templ
 async function downloadProtocol(){const button=$('#export-protocol');if(button)button.disabled=true;try{const bytes=await buildProtocolPdf(protocolRecord());const url=URL.createObjectURL(new Blob([bytes],{type:'application/pdf'}));const link=document.createElement('a');link.href=url;link.download=protocolById(protocolRecord().template).name.replace(/[^\p{L}\p{N} .-]/gu,'-')+' - ausgefüllt.pdf';link.click();setTimeout(()=>URL.revokeObjectURL(url),60000);toast('PDF erstellt. Prüfe die heruntergeladene Datei vor der Weitergabe.')}catch(error){toast(error.message.includes('WinAnsi')?'Dieses Zeichen wird im PDF nicht unterstützt. Ersetze Sonderzeichen durch ausgeschriebene Begriffe; dein Text bleibt gespeichert.':error.message||'PDF konnte nicht erstellt werden. Deine Eingaben bleiben erhalten.')}finally{if(button)button.disabled=false}}
 const originalRender=render;
 render=function(){const route=location.hash.slice(1);if(route==='protokolle'||route==='formular'){$('#app').innerHTML=route==='formular'?protocolEditor():catalogView();window.scrollTo(0,0);resizeProtocolPage()}else originalRender()};
-window.addEventListener('hashchange',()=>render());
+
 render();

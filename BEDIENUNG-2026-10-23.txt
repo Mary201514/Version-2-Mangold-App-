@@ -1,0 +1,29 @@
+Bedienführung und Protokollauswahl – 23. Oktober 2026
+
+Auf Nutzerwunsch geändert:
+- Schaltflächen mit plastischer Wirkung, klareren Rändern und Schatten.
+- Nächster Schritt in Firmenblau, feste große Vor-/Zurück-Leiste.
+- Auftrag, Dokumentation und Prüfen direkt als Schritte anklickbar.
+- Startseite wieder am Ablauf orientiert: Servicebericht, Inspektion,
+  Neuer AD erstellen. Die Protokollauswahl liegt beim Auftrag.
+- Protokolle bei bestehenden und neuen Einsätzen per Auswahlkästchen wählen
+  und wieder abwählen. Abwahl löscht keine bereits eingetragenen Werte.
+- Bereits begonnene Einsätze bleiben auch beim erneuten Öffnen erhalten.
+- Die Auswahl von Kunde/Anlage bleibt beim Zurückspringen erhalten.
+
+Durchgeführte Prüfungen:
+- JavaScript-Syntaxprüfung und statischer Build erfolgreich.
+- Browser: Vorwärts und zurück zwischen den Bildschirmen.
+- Direkte Sprünge Auftrag / Dokumentation / Prüfen mit Erhalt der Eingaben.
+- Auftragsinformation und Berichtstext nach Rückkehr unverändert vorhanden.
+- Bestehendes Protokoll abgewählt und wieder ausgewählt: Text unverändert,
+  keine doppelte Zuordnung.
+- Neuer AD mit anderer Testanlage: Protokoll gewählt, abgewählt,
+  gespeichert und nach Neuladen weiterhin abgewählt.
+- Vorherigen Auftrag erneut geöffnet: dessen Berichtstext wieder vorhanden.
+- Sichtprüfung der Schaltflächen und der festen Navigationsleiste im Browser.
+
+Weiterhin offen:
+- Erprobung durch Monteure auf den tatsächlich verwendeten Tablets.
+- Vollständige Offline-Nutzung und betriebliche Datensicherung.
+- Echte Spracheingabe, KI, ERP und Supabase wurden nicht verändert.
