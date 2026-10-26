@@ -15,7 +15,6 @@ resetForOrder=function(order){
 };
 
 home=function(){return previousHome()
-  .replace('href="#inspektion"','href="#einstieg" onclick="state.mode=\'Inspektion\'"')
   .replace('<a class="subtle" href="#entwuerfe">Meine Entwürfe →</a>',`<a class="choice new-ad-choice" href="#neu">${icon('plus')}<span><strong>Neuer AD erstellen</strong><small>Kunde und Anlage selbst auswählen</small></span><span class="arrow">›</span></a>`)};
 
 headerSteps=function(active){return `<nav class="steps journey-steps" aria-label="Schritte im Auftrag">${[['auftrag','Auftrag'],['dokumentation','Dokumentation'],['pruefen','Prüfen']].map(([route,label],index)=>`<a href="#${route}" ${active===index+1?'aria-current="step"':''}><span class="step-number">${index+1}</span><strong>${label}</strong></a>`).join('<i aria-hidden="true">›</i>')}</nav>`};

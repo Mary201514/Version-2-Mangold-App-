@@ -1,6 +1,9 @@
 Mangold App Version 2 – 26. Oktober 2026
 
 Umgesetzt:
+- Startseite auf ergänzenden Nutzerwunsch: Inspektion ist Teil des
+  Serviceberichts, keine separate Inspektionskachel. Prüfprotokolle weiterhin
+  im Auftrag auswählbar.
 - Oberflächensprache Deutsch (Standard), Englisch, Türkisch, Russisch,
   Polnisch und Rumänisch. Auswahl bleibt auf diesem Gerät erhalten.
 - Berichtssprache auf Nutzerwunsch fest Deutsch. Sprachwechsel verändert

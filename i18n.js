@@ -35,7 +35,7 @@ Einfach dokumentiert.|Easy to document.|Kolayca belgelenir.|Простое до�
 Weniger tippen. Mehr Zeit für die Arbeit vor Ort.|Less typing. More time for on-site work.|Daha az yazı. Sahadaki iş için daha fazla zaman.|Меньше ввода. Больше времени для работы на объекте.|Mniej pisania. Więcej czasu na pracę na miejscu.|Mai puțin de tastat. Mai mult timp pentru lucrul la fața locului.
 Was möchtest du machen?|What would you like to do?|Ne yapmak istiyorsun?|Что вы хотите сделать?|Co chcesz zrobić?|Ce dorești să faci?
 Servicebericht|Service report|Servis raporu|Сервисный отчёт|Raport serwisowy|Raport de service
-Reparatur, Wartung oder Störung|Repair, maintenance or fault|Onarım, bakım veya arıza|Ремонт, обслуживание или неисправность|Naprawa, konserwacja lub usterka|Reparație, întreținere sau defecțiune
+Reparatur, Wartung, Inspektion oder Störung|Repair, maintenance, inspection or fault|Onarım, bakım, kontrol veya arıza|Ремонт, обслуживание, осмотр или неисправность|Naprawa, konserwacja, inspekcja lub usterka|Reparație, întreținere, inspecție sau defecțiune
 Inspektion|Inspection|Kontrol|Осмотр|Inspekcja|Inspecție
 Prüfprotokoll ausfüllen|Complete inspection report|Kontrol formunu doldur|Заполнить протокол проверки|Wypełnij protokół kontroli|Completează protocolul de verificare
 Neuer AD erstellen|Create new service job|Yeni servis işi oluştur|Создать новую сервисную заявку|Utwórz nowe zlecenie serwisowe|Creează o intervenție nouă
