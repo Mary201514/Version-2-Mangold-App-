@@ -1,0 +1,340 @@
+const appLanguages=[['de','Deutsch'],['en','English'],['tr','Türkçe'],['ru','Русский'],['pl','Polski'],['ro','Română']];
+let appLanguage='de';try{const saved=localStorage.getItem('mangold-language');if(appLanguages.some(([key])=>key===saved))appLanguage=saved}catch{}
+const translationRows=`
+Künstliches Beispiel: Die anfänglichen Berichtsfelder sind fest vorbereitet und zeigen keine echte KI-Auswertung.|Fictional example: the initial report fields are predefined, not a real AI result.|Kurgusal örnek: başlangıç rapor alanları önceden hazırlanmıştır, gerçek yapay zekâ sonucu değildir.|Вымышленный пример: начальные поля подготовлены заранее, это не результат ИИ.|Fikcyjny przykład: początkowe pola są przygotowane z góry, nie są wynikiem AI.|Exemplu fictiv: câmpurile inițiale sunt predefinite, nu sunt rezultatul unei analize IA.
+KI-Verbindung nicht verfügbar. Deine Angaben bleiben erhalten; bitte manuell dokumentieren.|AI connection unavailable. Your details are kept; please document manually.|Yapay zekâ bağlantısı yok. Bilgilerin korunur; lütfen elle belgele.|Нет связи с ИИ. Данные сохранены; заполните вручную.|Brak połączenia z AI. Dane są zachowane; uzupełnij ręcznie.|Conexiunea IA nu este disponibilă. Datele sunt păstrate; documentează manual.
+Allgemein|General|Genel|Общее|Ogólne|General
+Drehstrom|Three-phase AC|Üç fazlı AC|Трёхфазный ток|Prąd trójfazowy|Curent trifazat
+Fettabscheider|Grease separator|Yağ ayırıcı|Жироуловитель|Separator tłuszczu|Separator de grăsimi
+Getriebe|Gearbox|Dişli kutusu|Редуктор|Przekładnia|Reductor
+Gleichstrom|Direct current|Doğru akım|Постоянный ток|Prąd stały|Curent continuu
+Lüftung|Ventilation|Havalandırma|Вентиляция|Wentylacja|Ventilație
+Pumpen / Hebeanlagen|Pumps / lifting stations|Pompalar / terfi tesisleri|Насосы / подъёмные установки|Pompy / przepompownie|Pompe / stații de pompare
+Pumpstation|Pumping station|Pompa istasyonu|Насосная станция|Przepompownia|Stație de pompare
+Vorherige Protokollseite|Previous report page|Önceki form sayfası|Предыдущая страница протокола|Poprzednia strona protokołu|Pagina anterioară a protocolului
+Nächste Protokollseite|Next report page|Sonraki form sayfası|Следующая страница протокола|Następna strona protokołu|Pagina următoare a protocolului
+Eintrag nach links|Move entry left|Girişi sola taşı|Сдвинуть запись влево|Przesuń wpis w lewo|Mută înregistrarea la stânga
+Eintrag nach rechts|Move entry right|Girişi sağa taşı|Сдвинуть запись вправо|Przesuń wpis w prawo|Mută înregistrarea la dreapta
+Eintrag nach oben|Move entry up|Girişi yukarı taşı|Сдвинуть запись вверх|Przesuń wpis w górę|Mută înregistrarea în sus
+Eintrag nach unten|Move entry down|Girişi aşağı taşı|Сдвинуть запись вниз|Przesuń wpis w dół|Mută înregistrarea în jos
+PDF erstellt. Prüfe die heruntergeladene Datei vor der Weitergabe.|PDF created. Check the downloaded file before sharing.|PDF oluşturuldu. Paylaşmadan önce indirilen dosyayı kontrol et.|PDF создан. Проверьте скачанный файл перед передачей.|Utworzono PDF. Sprawdź pobrany plik przed przekazaniem.|PDF creat. Verifică fișierul descărcat înainte de distribuire.
+Vorlage konnte nicht geladen werden. Prüfe die Internetverbindung und versuche es erneut.|Template could not be loaded. Check your connection and try again.|Şablon yüklenemedi. İnternet bağlantısını kontrol et ve tekrar dene.|Не удалось загрузить шаблон. Проверьте подключение и повторите.|Nie udało się wczytać szablonu. Sprawdź internet i spróbuj ponownie.|Șablonul nu a putut fi încărcat. Verifică internetul și reîncearcă.
+PDF konnte nicht erstellt werden. Deine Eingaben bleiben erhalten.|PDF could not be created. Your entries are kept.|PDF oluşturulamadı. Girişlerin korunur.|Не удалось создать PDF. Данные сохранены.|Nie udało się utworzyć PDF. Wpisy zachowano.|PDF-ul nu a putut fi creat. Înregistrările sunt păstrate.
+Dieses Zeichen wird im PDF nicht unterstützt. Ersetze Sonderzeichen durch ausgeschriebene Begriffe; dein Text bleibt gespeichert.|This character is not supported in the PDF. Replace special characters with written-out terms; your text is kept.|Bu karakter PDF'de desteklenmiyor. Özel karakterleri açık yazımla değiştir; metnin korunur.|Этот символ не поддерживается в PDF. Замените его словами; текст сохранён.|Ten znak nie jest obsługiwany w PDF. Zastąp znaki specjalne opisem; tekst pozostaje zapisany.|Acest caracter nu este acceptat în PDF. Înlocuiește caracterele speciale cu termeni scriși; textul se păstrează.
+Berichte werden immer auf Deutsch erstellt.|Reports are always written in German.|Raporlar her zaman Almanca hazırlanır.|Отчёты всегда составляются на немецком.|Raporty są zawsze tworzone po niemiecku.|Rapoartele sunt întotdeauna redactate în germană.
+Sprache|Language|Dil|Язык|Język|Limbă
+ANSICHT ZUR ABSTIMMUNG|PREVIEW FOR REVIEW|İNCELEME ÖNİZLEMESİ|ВЕРСИЯ ДЛЯ СОГЛАСОВАНИЯ|WERSJA DO UZGODNIENIA|VERSIUNE PENTRU APROBARE
+Nur künstliche Testdaten · KI nach Freigabe verfügbar|Artificial test data only · AI subject to approval|Yalnızca yapay test verileri · Yapay zekâ onay sonrası kullanılabilir|Только искусственные тестовые данные · ИИ после разрешения|Tylko sztuczne dane testowe · AI po zatwierdzeniu|Doar date de test fictive · IA după aprobare
+Service-Assistent|Service assistant|Servis asistanı|Сервисный помощник|Asystent serwisowy|Asistent de service
+Für deinen Einsatz.|For your service visit.|Servis çalışman için.|Для вашей работы.|Na Twoje zlecenie.|Pentru intervenția ta.
+Künstlicher Testmonteur|Fictional test technician|Kurgusal test teknisyeni|Вымышленный тестовый техник|Fikcyjny technik testowy|Tehnician de test fictiv
+Lokaler Entwurf · keine Übertragung an Mangold oder ERP|Local draft · no transfer to Mangold or ERP|Yerel taslak · Mangold veya ERP'ye aktarım yok|Локальный черновик · без передачи в Mangold или ERP|Szkic lokalny · bez przesyłania do Mangold ani ERP|Ciornă locală · fără transfer către Mangold sau ERP
+MANGOLD SERVICE-ASSISTENT|MANGOLD SERVICE ASSISTANT|MANGOLD SERVİS ASİSTANI|СЕРВИСНЫЙ ПОМОЩНИК MANGOLD|ASYSTENT SERWISOWY MANGOLD|ASISTENT DE SERVICE MANGOLD
+Dein Einsatz.|Your service visit.|Servis çalışman.|Ваша работа.|Twoje zlecenie.|Intervenția ta.
+Einfach dokumentiert.|Easy to document.|Kolayca belgelenir.|Простое документирование.|Prosta dokumentacja.|Documentată simplu.
+Weniger tippen. Mehr Zeit für die Arbeit vor Ort.|Less typing. More time for on-site work.|Daha az yazı. Sahadaki iş için daha fazla zaman.|Меньше ввода. Больше времени для работы на объекте.|Mniej pisania. Więcej czasu na pracę na miejscu.|Mai puțin de tastat. Mai mult timp pentru lucrul la fața locului.
+Was möchtest du machen?|What would you like to do?|Ne yapmak istiyorsun?|Что вы хотите сделать?|Co chcesz zrobić?|Ce dorești să faci?
+Servicebericht|Service report|Servis raporu|Сервисный отчёт|Raport serwisowy|Raport de service
+Reparatur, Wartung oder Störung|Repair, maintenance or fault|Onarım, bakım veya arıza|Ремонт, обслуживание или неисправность|Naprawa, konserwacja lub usterka|Reparație, întreținere sau defecțiune
+Inspektion|Inspection|Kontrol|Осмотр|Inspekcja|Inspecție
+Prüfprotokoll ausfüllen|Complete inspection report|Kontrol formunu doldur|Заполнить протокол проверки|Wypełnij protokół kontroli|Completează protocolul de verificare
+Neuer AD erstellen|Create new service job|Yeni servis işi oluştur|Создать новую сервисную заявку|Utwórz nowe zlecenie serwisowe|Creează o intervenție nouă
+Kunde und Anlage selbst auswählen|Select customer and equipment|Müşteri ve ekipmanı seç|Выбрать клиента и оборудование|Wybierz klienta i urządzenie|Selectează clientul și instalația
+Einmal erzählen.|Describe it once.|Bir kez anlat.|Расскажите один раз.|Opowiedz raz.|Povestește o singură dată.
+Alles im Blick.|Everything in view.|Her şey göz önünde.|Всё перед глазами.|Wszystko pod kontrolą.|Totul la vedere.
+Ein Assistent für deine ganze Dokumentation.|One assistant for all your documentation.|Tüm belgelerin için tek asistan.|Один помощник для всей документации.|Jeden asystent do całej dokumentacji.|Un singur asistent pentru toată documentația.
+„Pumpe zerlegt und gereinigt, eine Dichtung verwendet, zwei Stunden Arbeit …“|“Pump dismantled and cleaned, one seal used, two hours of work …”|“Pompa söküldü ve temizlendi, bir conta kullanıldı, iki saat çalışma …”|«Насос разобран и очищен, использовано одно уплотнение, два часа работы …»|„Pompę rozebrano i wyczyszczono, użyto jednej uszczelki, dwie godziny pracy …”|„Pompă demontată și curățată, o garnitură utilizată, două ore de lucru …”
+Befund|Findings|Bulgular|Состояние|Stan techniczny|Constatări
+Arbeiten|Work|Çalışmalar|Работы|Prace|Lucrări
+Material|Materials|Malzeme|Материалы|Materiały|Materiale
+Zeiten|Times|Süreler|Время|Czas|Durate
+Kilometer|Kilometres|Kilometre|Километры|Kilometry|Kilometri
+Du prüfst die Angaben und entscheidest, was übernommen wird.|You check the details and decide what to accept.|Bilgileri kontrol eder ve neyin alınacağına sen karar verirsin.|Вы проверяете данные и решаете, что принять.|Sprawdzasz dane i decydujesz, co przyjąć.|Verifici datele și decizi ce se preia.
+Startseite|Home|Ana sayfa|Главная|Strona główna|Pagina principală
+Zurück|Back|Geri|Назад|Wstecz|Înapoi
+Wie möchtest du starten?|How would you like to start?|Nasıl başlamak istiyorsun?|Как вы хотите начать?|Jak chcesz zacząć?|Cum dorești să începi?
+Öffne deinen Auftrag oder wähle Kunde und Anlage selbst aus.|Open your job or select the customer and equipment.|İş emrini aç veya müşteri ve ekipmanı seç.|Откройте заявку или выберите клиента и оборудование.|Otwórz zlecenie lub wybierz klienta i urządzenie.|Deschide comanda sau selectează clientul și instalația.
+Vorhandenen Auftrag öffnen|Open existing job|Mevcut iş emrini aç|Открыть существующую заявку|Otwórz istniejące zlecenie|Deschide o comandă existentă
+Deine zugewiesenen Aufträge ansehen|View your assigned jobs|Atanan iş emirlerini görüntüle|Посмотреть назначенные заявки|Zobacz przydzielone zlecenia|Vezi comenzile alocate
+Neuen Einsatz anlegen|Create a new service job|Yeni servis işi oluştur|Создать новую заявку|Utwórz nowe zlecenie|Creează o intervenție nouă
+Deine Einsätze|Your service jobs|Servis işlerin|Ваши заявки|Twoje zlecenia|Intervențiile tale
+Meine Aufträge|My jobs|İş emirlerim|Мои заявки|Moje zlecenia|Comenzile mele
+Künstliche Beispielaufträge für die Abstimmung.|Fictional sample jobs for review.|İnceleme için kurgusal örnek iş emirleri.|Вымышленные заявки для согласования.|Fikcyjne zlecenia przykładowe do uzgodnienia.|Comenzi fictive pentru evaluare.
+Auftrag oder Kunde suchen|Search job or customer|İş emri veya müşteri ara|Поиск заявки или клиента|Szukaj zlecenia lub klienta|Caută comanda sau clientul
+Kundenname oder Auftragsnummer|Customer name or job number|Müşteri adı veya iş emri numarası|Имя клиента или номер заявки|Nazwa klienta lub numer zlecenia|Numele clientului sau numărul comenzii
+Auftrag öffnen|Open job|İş emrini aç|Открыть заявку|Otwórz zlecenie|Deschide comanda
+Kein Auftrag gefunden. Versuche einen anderen Kundennamen oder eine andere Auftragsnummer.|No job found. Try another customer name or job number.|İş emri bulunamadı. Başka müşteri adı veya iş emri numarası dene.|Заявка не найдена. Попробуйте другое имя клиента или номер.|Nie znaleziono zlecenia. Spróbuj innej nazwy klienta lub numeru.|Nicio comandă găsită. Încearcă alt nume de client sau număr.
+Auftrag|Job|İş emri|Заявка|Zlecenie|Comandă
+Dokumentation|Documentation|Belgeleme|Документация|Dokumentacja|Documentare
+Prüfen|Review|Kontrol et|Проверка|Sprawdź|Verificare
+Schritte im Auftrag|Job steps|İş emri adımları|Этапы заявки|Etapy zlecenia|Etapele comenzii
+Prüfe kurz, ob Kunde und Anlage richtig sind.|Check that the customer and equipment are correct.|Müşteri ve ekipmanın doğru olduğunu kontrol et.|Проверьте правильность клиента и оборудования.|Sprawdź, czy klient i urządzenie są poprawne.|Verifică dacă clientul și instalația sunt corecte.
+Neuer Einsatz · ohne ERP-Freigabe|New service job · no ERP approval|Yeni servis işi · ERP onayı yok|Новая заявка · без разрешения ERP|Nowe zlecenie · bez zatwierdzenia ERP|Intervenție nouă · fără aprobare ERP
+Nicht als ERP-Auftrag freigegeben|Not approved as an ERP order|ERP iş emri olarak onaylanmadı|Не утверждено как заказ ERP|Niezatwierdzone jako zlecenie ERP|Neaprobat ca ordin ERP
+Offen|Open|Açık|Открыто|Otwarte|Deschis
+In Bearbeitung|In progress|İşleniyor|В работе|W realizacji|În lucru
+Entwurf|Draft|Taslak|Черновик|Szkic|Ciornă
+Aufgabenbeschreibung|Job description|İş açıklaması|Описание задачи|Opis zadania|Descrierea sarcinii
+Einsatzdaten|Service visit details|Servis bilgileri|Данные выезда|Dane interwencji|Datele intervenției
+Datum|Date|Tarih|Дата|Data|Data
+Ausführender Monteur|Technician performing the work|İşi yapan teknisyen|Исполнитель|Technik wykonujący prace|Tehnician executant
+Dokumentation starten|Start documentation|Belgelemeyi başlat|Начать документирование|Rozpocznij dokumentację|Începe documentarea
+Für den Monteur|For the technician|Teknisyen için|Для техника|Dla technika|Pentru tehnician
+Wichtige Informationen|Important information|Önemli bilgiler|Важная информация|Ważne informacje|Informații importante
+Wichtige Informationen zum Auftrag|Important job information|İş emri hakkında önemli bilgiler|Важная информация по заявке|Ważne informacje o zleceniu|Informații importante despre comandă
+Zum Beispiel Zugang, Ansprechpartner vor Ort oder Hinweise zum Einsatz …|For example access, on-site contact or job notes …|Örneğin erişim, sahadaki irtibat kişisi veya iş notları …|Например доступ, контактное лицо на объекте или указания …|Np. dostęp, osoba kontaktowa lub uwagi dotyczące zlecenia …|De exemplu acces, persoana de contact sau indicații …
+Diese Angaben werden mit dem lokalen Entwurf gespeichert.|These details are saved with the local draft.|Bu bilgiler yerel taslakla kaydedilir.|Эти данные сохраняются в локальном черновике.|Te dane są zapisywane w lokalnym szkicu.|Aceste date sunt salvate în ciorna locală.
+Anfahrt|Directions|Ulaşım|Проезд|Dojazd|Deplasare
+Route zum Einsatz|Route to the job|İş yerine rota|Маршрут к объекту|Trasa do miejsca pracy|Traseul către intervenție
+Noch keine Einsatzadresse hinterlegt|No job address entered yet|Henüz iş yeri adresi girilmedi|Адрес объекта ещё не указан|Nie podano adresu miejsca pracy|Adresa intervenției nu a fost introdusă
+Route aufrufen|Show route|Rotayı aç|Открыть маршрут|Otwórz trasę|Deschide traseul
+Prüfprotokolle zur Anlage|Inspection reports for the equipment|Ekipman kontrol formları|Протоколы проверки оборудования|Protokoły kontroli urządzenia|Protocoale de verificare pentru instalație
+Wähle die passende Vorlage für diesen Einsatz.|Select the right template for this job.|Bu iş için uygun şablonu seç.|Выберите подходящий шаблон для этой заявки.|Wybierz odpowiedni szablon do tego zlecenia.|Alege șablonul potrivit pentru intervenție.
+Protokoll hinzufügen|Add report|Form ekle|Добавить протокол|Dodaj protokół|Adaugă protocol
+Auftragsangaben speichern|Save job details|İş emri bilgilerini kaydet|Сохранить данные заявки|Zapisz dane zlecenia|Salvează datele comenzii
+Zur Auftragsübersicht|Back to job overview|İş emri özetine dön|К обзору заявки|Do przeglądu zlecenia|Înapoi la prezentarea comenzii
+Erzähl von deinem Einsatz.|Describe your service visit.|Servis çalışmanı anlat.|Расскажите о своей работе.|Opowiedz o wykonanej pracy.|Descrie intervenția ta.
+Befund, Arbeiten, Material und Zeiten – alles in einem Gespräch.|Findings, work, materials and times – all in one conversation.|Bulgular, çalışmalar, malzeme ve süreler – tek konuşmada.|Состояние, работы, материалы и время — в одном сообщении.|Stan, prace, materiały i czas – wszystko w jednej rozmowie.|Constatări, lucrări, materiale și durate – într-o singură conversație.
+Mangold Assistent|Mangold assistant|Mangold asistanı|Помощник Mangold|Asystent Mangold|Asistent Mangold
+Deine Dokumentation an einem Ort|Your documentation in one place|Belgelerin tek yerde|Вся документация в одном месте|Twoja dokumentacja w jednym miejscu|Documentația ta într-un singur loc
+DEIN ASSISTENT|YOUR ASSISTANT|ASİSTANIN|ВАШ ПОМОЩНИК|TWÓJ ASYSTENT|ASISTENTUL TĂU
+Was hast du vor Ort festgestellt und erledigt?|What did you find and do on site?|Sahada ne tespit ettin ve ne yaptın?|Что вы обнаружили и выполнили на объекте?|Co stwierdzono i wykonano na miejscu?|Ce ai constatat și efectuat la fața locului?
+Erzähle alles zusammen. Du musst die Angaben nicht einzeln eingeben.|Describe everything together. You do not need to enter each detail separately.|Hepsini birlikte anlat. Bilgileri tek tek girmene gerek yok.|Расскажите всё вместе. Не нужно вводить каждое сведение отдельно.|Opowiedz wszystko razem. Nie musisz wpisywać każdej informacji osobno.|Spune totul împreună. Nu trebuie să introduci fiecare informație separat.
+Ausgeführte Arbeiten|Work performed|Yapılan çalışmalar|Выполненные работы|Wykonane prace|Lucrări efectuate
+Arbeitszeit|Work time|Çalışma süresi|Рабочее время|Czas pracy|Timp de lucru
+Rüst- & Wartezeit|Setup & waiting time|Hazırlık ve bekleme süresi|Время подготовки и ожидания|Czas przygotowania i oczekiwania|Timp de pregătire și așteptare
+Reisezeit hin & rück|Outbound & return travel time|Gidiş ve dönüş yol süresi|Время пути туда и обратно|Czas podróży tam i z powrotem|Timp de deplasare dus și întors
+Alles auf einmal sprechen|Dictate everything at once|Hepsini bir kerede söyle|Продиктовать всё сразу|Podyktuj wszystko naraz|Dictează totul odată
+Sprachablauf im Entwurf ansehen|View voice workflow preview|Ses akışı önizlemesini gör|Посмотреть демонстрацию голосового ввода|Zobacz podgląd obsługi głosowej|Vezi previzualizarea fluxului vocal
+Deine ursprünglichen Angaben|Your original input|Orijinal bilgilerin|Ваши исходные данные|Twoje oryginalne dane|Datele tale originale
+Auch per Tastatur möglich|Keyboard input also available|Klavyeyle de girilebilir|Можно вводить с клавиатуры|Można też wpisać z klawiatury|Se poate introduce și de la tastatură
+Beschreibe deinen Einsatz …|Describe your service visit …|Servis çalışmanı anlat …|Опишите свою работу …|Opisz wykonaną pracę …|Descrie intervenția ta …
+Beispiel ausprobieren|Try example|Örneği dene|Попробовать пример|Wypróbuj przykład|Încearcă exemplul
+Angaben prüfen|Review details|Bilgileri kontrol et|Проверить данные|Sprawdź dane|Verifică datele
+Im Entwurf wird kein Mikrofon aktiviert. Texte bleiben auf diesem Gerät.|No microphone is activated in this preview. Texts remain on this device.|Bu önizlemede mikrofon açılmaz. Metinler bu cihazda kalır.|В этой версии микрофон не включается. Тексты остаются на устройстве.|W tym podglądzie mikrofon nie jest włączany. Teksty pozostają na urządzeniu.|În această previzualizare microfonul nu este activat. Textele rămân pe acest dispozitiv.
+Dein Einsatz|Your service visit|Servis çalışman|Ваша работа|Twoje zlecenie|Intervenția ta
+Das gehört dazu|What to include|İçermesi gerekenler|Что нужно указать|Co należy uwzględnić|Ce trebuie inclus
+Anlage|Equipment|Ekipman|Оборудование|Urządzenie|Instalație
+Bericht|Report|Rapor|Отчёт|Raport|Raport
+Befund, ausgeführte Arbeiten und Besonderheiten|Findings, work performed and notes|Bulgular, yapılan çalışmalar ve özel notlar|Состояние, выполненные работы и особенности|Stan, wykonane prace i uwagi|Constatări, lucrări efectuate și observații
+Menge, Einheit und Artikelnummer|Quantity, unit and article number|Miktar, birim ve ürün numarası|Количество, единица и артикул|Ilość, jednostka i numer artykułu|Cantitate, unitate și cod de articol
+Zeit & Strecke|Time & distance|Süre ve mesafe|Время и расстояние|Czas i dystans|Timp și distanță
+Arbeit, Rüsten, Warten, Hin- und Rückreise sowie km|Work, setup, waiting, outbound and return travel, and km|Çalışma, hazırlık, bekleme, gidiş-dönüş ve km|Работа, подготовка, ожидание, дорога туда и обратно, км|Praca, przygotowanie, oczekiwanie, podróż tam i z powrotem oraz km|Lucru, pregătire, așteptare, deplasare dus-întors și km
+Du behältst das letzte Wort. Prüfe und korrigiere alle Angaben vor der Bestätigung.|You have the final say. Check and correct all details before confirming.|Son söz senin. Onaylamadan önce tüm bilgileri kontrol et ve düzelt.|Решение за вами. Проверьте и исправьте все данные перед подтверждением.|Ty decydujesz. Sprawdź i popraw wszystkie dane przed zatwierdzeniem.|Tu decizi. Verifică și corectează toate datele înainte de confirmare.
+Fehlende Angaben bleiben offen. Es werden keine Messwerte oder Prüfergebnisse ergänzt.|Missing details stay empty. No measurements or test results are added.|Eksik bilgiler boş kalır. Ölçüm veya test sonucu eklenmez.|Отсутствующие данные остаются пустыми. Измерения и результаты не добавляются.|Brakujące dane pozostają puste. Pomiary ani wyniki nie są dopisywane.|Datele lipsă rămân necompletate. Nu se adaugă măsurători sau rezultate.
+Entwurf auf Gerät speichern|Save draft on device|Taslağı cihazda kaydet|Сохранить черновик на устройстве|Zapisz szkic na urządzeniu|Salvează ciorna pe dispozitiv
+Zur Dokumentation|Back to documentation|Belgelemeye dön|К документации|Do dokumentacji|Înapoi la documentare
+Deine Kontrolle|Your review|Kontrolün|Ваша проверка|Twoja kontrola|Verificarea ta
+Passt alles so?|Is everything correct?|Her şey doğru mu?|Всё верно?|Czy wszystko się zgadza?|Este totul corect?
+Prüfe deine Angaben. Du kannst jeden Eintrag korrigieren.|Check your details. You can correct every entry.|Bilgilerini kontrol et. Her kaydı düzeltebilirsin.|Проверьте данные. Любую запись можно исправить.|Sprawdź dane. Każdy wpis możesz poprawić.|Verifică datele. Poți corecta fiecare intrare.
+Noch keine Angaben.|No details yet.|Henüz bilgi yok.|Данных пока нет.|Brak danych.|Nu există încă date.
+Befund / Zustand der Anlage|Findings / equipment condition|Bulgular / ekipmanın durumu|Состояние оборудования|Stan techniczny urządzenia|Constatări / starea instalației
+Material · Menge, Einheit, Artikelnummer|Materials · quantity, unit, article number|Malzeme · miktar, birim, ürün numarası|Материалы · количество, единица, артикул|Materiały · ilość, jednostka, numer artykułu|Materiale · cantitate, unitate, cod articol
+Rüstzeit|Setup time|Hazırlık süresi|Время подготовки|Czas przygotowania|Timp de pregătire
+Wartezeit|Waiting time|Bekleme süresi|Время ожидания|Czas oczekiwania|Timp de așteptare
+Reisezeit hin|Outbound travel time|Gidiş yol süresi|Время пути туда|Czas podróży do klienta|Timp de deplasare dus
+Reisezeit rück|Return travel time|Dönüş yol süresi|Время пути обратно|Czas podróży powrotnej|Timp de deplasare întors
+Gefahrene Kilometer|Kilometres driven|Gidilen kilometre|Пройденные километры|Przejechane kilometry|Kilometri parcurși
+Mängel und Besonderheiten|Defects and notes|Kusurlar ve özel notlar|Дефекты и особенности|Usterki i uwagi|Deficiențe și observații
+Noch offen – bitte ergänzen, wenn zutreffend|Not yet specified – add if applicable|Henüz belirtilmedi – uygunsa ekle|Не указано — дополните, если применимо|Nie podano – uzupełnij, jeśli dotyczy|Nespecificat – completează dacă este cazul
+Noch offen|Not yet specified|Henüz belirtilmedi|Не указано|Nie podano|Nespecificat
+Noch abzustimmen: Welche Angaben sind für den Abschluss verpflichtend? Leere Felder werden nicht als „0“ oder „keine Mängel“ gewertet.|To be agreed: Which details are mandatory for completion? Empty fields do not mean “0” or “no defects”.|Kararlaştırılacak: Tamamlama için hangi bilgiler zorunlu? Boş alanlar “0” veya “kusur yok” sayılmaz.|Нужно согласовать обязательные поля. Пустое поле не означает «0» или «нет дефектов».|Do uzgodnienia: Które dane są wymagane do zakończenia? Puste pola nie oznaczają „0” ani „brak usterek”.|De stabilit: Ce date sunt obligatorii pentru finalizare? Câmpurile goale nu înseamnă „0” sau „fără deficiențe”.
+Angaben geprüft bestätigen|Confirm details reviewed|Bilgileri kontrol ederek onayla|Подтвердить проверку данных|Potwierdź sprawdzenie danych|Confirmă verificarea datelor
+Als Entwurf speichern|Save as draft|Taslak olarak kaydet|Сохранить как черновик|Zapisz jako szkic|Salvează ca ciornă
+Angaben von dir geprüft.|Details reviewed by you.|Bilgileri kontrol ettin.|Данные проверены вами.|Dane sprawdzone przez Ciebie.|Date verificate de tine.
+Der Entwurf ist auf diesem Gerät gespeichert. Es wurde kein betrieblicher Bericht abgeschlossen oder übertragen.|The draft is saved on this device. No business report has been finalised or transferred.|Taslak bu cihazda kaydedildi. İşletme raporu tamamlanmadı veya aktarılmadı.|Черновик сохранён на устройстве. Производственный отчёт не завершён и не передан.|Szkic zapisano na urządzeniu. Raport firmowy nie został zakończony ani przesłany.|Ciorna este salvată pe acest dispozitiv. Niciun raport operațional nu a fost finalizat sau transmis.
+Ungeplanter Einsatz|Unplanned service visit|Plansız servis|Внеплановый выезд|Nieplanowana interwencja|Intervenție neplanificată
+Kunde und Anlage auswählen|Select customer and equipment|Müşteri ve ekipmanı seç|Выбрать клиента и оборудование|Wybierz klienta i urządzenie|Selectează clientul și instalația
+Nur künstliche Testdaten. Dieser Vorgang ist kein freigegebener ERP-Auftrag.|Artificial test data only. This is not an approved ERP order.|Yalnızca yapay test verileri. Bu işlem onaylanmış ERP iş emri değildir.|Только искусственные данные. Это не утверждённый заказ ERP.|Tylko sztuczne dane testowe. To nie jest zatwierdzone zlecenie ERP.|Doar date fictive. Această intervenție nu este o comandă ERP aprobată.
+Kunde und zugehörige Anlage|Customer and related equipment|Müşteri ve ilgili ekipman|Клиент и его оборудование|Klient i powiązane urządzenie|Clientul și instalația aferentă
+Einsatz beginnen|Start service visit|Servisi başlat|Начать работу|Rozpocznij interwencję|Începe intervenția
+Änderungen noch nicht gespeichert|Changes not saved yet|Değişiklikler henüz kaydedilmedi|Изменения ещё не сохранены|Zmiany nie zostały zapisane|Modificările nu sunt încă salvate
+Entwurf auf diesem Gerät gespeichert|Draft saved on this device|Taslak bu cihazda kaydedildi|Черновик сохранён на устройстве|Szkic zapisano na urządzeniu|Ciorna salvată pe acest dispozitiv
+Entwurf auf diesem Gerät gespeichert.|Draft saved on this device.|Taslak bu cihazda kaydedildi.|Черновик сохранён на устройстве.|Szkic zapisano na urządzeniu.|Ciorna salvată pe acest dispozitiv.
+Noch kein Entwurf gespeichert|No draft saved yet|Henüz taslak kaydedilmedi|Черновик ещё не сохранён|Nie zapisano jeszcze szkicu|Nicio ciornă salvată încă
+Lokales Speichern nicht verfügbar|Local storage unavailable|Yerel kayıt kullanılamıyor|Локальное сохранение недоступно|Zapis lokalny niedostępny|Salvarea locală nu este disponibilă
+Speichern fehlgeschlagen – Angaben nur in dieser Sitzung|Saving failed – details only in this session|Kayıt başarısız – bilgiler yalnızca bu oturumda|Сохранение не удалось — данные только в этой сессии|Zapis nieudany – dane tylko w tej sesji|Salvare eșuată – datele există doar în această sesiune
+Speichern fehlgeschlagen. Lass die Seite geöffnet und kopiere deinen Text.|Saving failed. Keep the page open and copy your text.|Kayıt başarısız. Sayfayı açık tut ve metnini kopyala.|Не удалось сохранить. Оставьте страницу открытой и скопируйте текст.|Zapis nieudany. Nie zamykaj strony i skopiuj tekst.|Salvarea a eșuat. Lasă pagina deschisă și copiază textul.
+Nächster Schritt|Next step|Sonraki adım|Следующий шаг|Następny krok|Pasul următor
+Vor und zurück|Forward and back|İleri ve geri|Вперёд и назад|Dalej i wstecz|Înainte și înapoi
+Deine Eingaben bleiben beim Wechsel erhalten.|Your entries are kept when switching screens.|Ekran değiştirirken girişlerin korunur.|Данные сохраняются при переходе между экранами.|Dane pozostają zachowane przy zmianie ekranu.|Datele introduse se păstrează la schimbarea ecranului.
+Beginne mit deinem Einsatz|Start with your service job|Servis işinle başla|Начните с вашей заявки|Zacznij od zlecenia|Începe cu intervenția ta
+Auftrag auswählen|Select job|İş emri seç|Выбрать заявку|Wybierz zlecenie|Selectează comanda
+Auftrag öffnen oder neuen AD erstellen|Open a job or create a new service job|İş emri aç veya yeni servis işi oluştur|Открыть или создать заявку|Otwórz lub utwórz zlecenie|Deschide sau creează o intervenție
+Zum ausgewählten Auftrag|Go to selected job|Seçili iş emrine git|К выбранной заявке|Do wybranego zlecenia|La comanda selectată
+Öffne deinen Auftrag in der Liste|Open your job in the list|Listeden iş emrini aç|Откройте заявку в списке|Otwórz zlecenie na liście|Deschide comanda din listă
+Deine Angaben sind bestätigt|Your details are confirmed|Bilgilerin onaylandı|Ваши данные подтверждены|Twoje dane są potwierdzone|Datele tale sunt confirmate
+Auswahl speichern · zum Auftrag|Save selection · back to job|Seçimi kaydet · iş emrine dön|Сохранить выбор · к заявке|Zapisz wybór · do zlecenia|Salvează selecția · la comandă
+Speichern · zum Auftrag|Save · back to job|Kaydet · iş emrine dön|Сохранить · к заявке|Zapisz · do zlecenia|Salvează · la comandă
+Protokoll bearbeiten|Edit report|Formu düzenle|Редактировать протокол|Edytuj protokół|Editează protocolul
+Zum Auftrag|Back to job|İş emrine dön|К заявке|Do zlecenia|La comandă
+Inspektion zum Auftrag|Inspection for the job|İş emri kontrolü|Осмотр по заявке|Inspekcja do zlecenia|Inspecție pentru comandă
+Entwurf weiterbearbeiten|Continue draft|Taslağa devam et|Продолжить черновик|Kontynuuj szkic|Continuă ciorna
+Auf diesem Gerät gespeichert|Saved on this device|Bu cihazda kaydedildi|Сохранено на устройстве|Zapisano na urządzeniu|Salvat pe acest dispozitiv
+Noch nicht gespeichert|Not yet saved|Henüz kaydedilmedi|Ещё не сохранено|Jeszcze niezapisane|Nesalvat încă
+Lokal gespeichert|Saved locally|Yerel kaydedildi|Сохранено локально|Zapisano lokalnie|Salvat local
+Prüfprotokolle|Inspection reports|Kontrol formları|Протоколы проверки|Protokoły kontroli|Protocoale de verificare
+Eure Originalvorlagen|Your original templates|Orijinal şablonlarınız|Ваши исходные шаблоны|Wasze oryginalne szablony|Șabloanele voastre originale
+Wähle die passenden Protokolle für diesen Auftrag. Du kannst sie jederzeit wieder abwählen.|Select suitable reports for this job. You can deselect them at any time.|Bu iş için uygun formları seç. Seçimi istediğin zaman kaldırabilirsin.|Выберите протоколы для заявки. Выбор можно отменить в любой момент.|Wybierz protokoły do zlecenia. Możesz je w każdej chwili odznaczyć.|Selectează protocoalele potrivite. Le poți deselecta oricând.
+Aktuell ausgewählter Einsatz|Currently selected job|Şu anda seçili servis işi|Текущая выбранная заявка|Aktualnie wybrane zlecenie|Intervenția selectată în prezent
+Einsatz ansehen|View job|Servis işini görüntüle|Посмотреть заявку|Zobacz zlecenie|Vezi intervenția
+Anlage / Anlagentyp|Equipment / type|Ekipman / tipi|Оборудование / тип|Urządzenie / typ|Instalație / tip
+Alle Anlagen|All equipment|Tüm ekipmanlar|Всё оборудование|Wszystkie urządzenia|Toate instalațiile
+Bereich|Category|Bölüm|Раздел|Kategoria|Categorie
+Alle Bereiche|All categories|Tüm bölümler|Все разделы|Wszystkie kategorie|Toate categoriile
+Inbetriebnahme|Commissioning|Devreye alma|Ввод в эксплуатацию|Uruchomienie|Punere în funcțiune
+Inspektion / Wartung|Inspection / maintenance|Kontrol / bakım|Осмотр / обслуживание|Inspekcja / konserwacja|Inspecție / întreținere
+Werkstatt|Workshop|Atölye|Мастерская|Warsztat|Atelier
+Unterlagen|Documents|Belgeler|Документы|Dokumenty|Documente
+Vorlage suchen|Search template|Şablon ara|Поиск шаблона|Szukaj szablonu|Caută șablon
+Zum Beispiel Aqualift oder Pumpstation|For example Aqualift or Pumpstation|Örneğin Aqualift veya Pumpstation|Например Aqualift или Pumpstation|Na przykład Aqualift lub Pumpstation|De exemplu Aqualift sau Pumpstation
+Für diesen Auftrag auswählen|Select for this job|Bu iş emri için seç|Выбрать для этой заявки|Wybierz do tego zlecenia|Selectează pentru această comandă
+Für diesen Auftrag ausgewählt|Selected for this job|Bu iş emri için seçildi|Выбрано для этой заявки|Wybrano do tego zlecenia|Selectat pentru această comandă
+✓ Ausgewählt|✓ Selected|✓ Seçildi|✓ Выбрано|✓ Wybrano|✓ Selectat
+Ausfüllen|Complete|Doldur|Заполнить|Wypełnij|Completează
+Abwählen|Deselect|Seçimi kaldır|Отменить выбор|Odznacz|Deselectează
+Deine bisherigen Einträge sind erhalten.|Your previous entries are kept.|Önceki girişlerin korunur.|Предыдущие записи сохранены.|Twoje wcześniejsze wpisy zachowano.|Înregistrările anterioare sunt păstrate.
+Protokoll ausfüllen|Complete report|Formu doldur|Заполнить протокол|Wypełnij protokół|Completează protocolul
+Auswählen und ausfüllen|Select and complete|Seç ve doldur|Выбрать и заполнить|Wybierz i wypełnij|Selectează și completează
+Vorlage ansehen|View template|Şablonu görüntüle|Посмотреть шаблон|Zobacz szablon|Vezi șablonul
+Keine passende Vorlage gefunden|No suitable template found|Uygun şablon bulunamadı|Подходящий шаблон не найден|Nie znaleziono odpowiedniego szablonu|Nu s-a găsit un șablon potrivit
+Ändere den Anlagentyp oder den Suchbegriff.|Change equipment type or search term.|Ekipman tipini veya arama terimini değiştir.|Измените тип оборудования или поисковое слово.|Zmień typ urządzenia lub wyszukiwane słowo.|Schimbă tipul instalației sau termenul de căutare.
+Alle Vorlagen anzeigen|Show all templates|Tüm şablonları göster|Показать все шаблоны|Pokaż wszystkie szablony|Afișează toate șabloanele
+Die Auswahl nach Anlage ersetzt keine technische Prüfung der passenden Vorlage. Es werden keine Ergebnisse vorgegeben.|Selecting by equipment does not replace checking the template's suitability. No results are prefilled.|Ekipmana göre seçim, şablonun teknik uygunluk kontrolünün yerine geçmez. Sonuçlar önceden doldurulmaz.|Выбор по оборудованию не заменяет проверку пригодности шаблона. Результаты не заполняются заранее.|Wybór według urządzenia nie zastępuje sprawdzenia szablonu. Wyniki nie są wpisywane z góry.|Selectarea după instalație nu înlocuiește verificarea șablonului. Nu se precompletează rezultate.
+Zur Protokollauswahl|Back to report selection|Form seçimine dön|К выбору протокола|Do wyboru protokołu|Înapoi la selectarea protocolului
+Wähle Text oder Häkchen und tippe auf die passende Stelle im Protokoll.|Choose text or a check mark and tap the right place in the report.|Metin veya onay işareti seç ve formda uygun yere dokun.|Выберите текст или галочку и нажмите нужное место в протоколе.|Wybierz tekst lub znacznik i dotknij odpowiedniego miejsca w protokole.|Alege text sau bifă și atinge locul potrivit în protocol.
+T · Text eintragen|T · Enter text|T · Metin gir|T · Ввести текст|T · Wpisz tekst|T · Introdu text
+✓ · Häkchen setzen|✓ · Add check mark|✓ · Onay işareti ekle|✓ · Поставить галочку|✓ · Dodaj znacznik|✓ · Adaugă bifă
+Dein Eintrag|Your entry|Girişin|Ваша запись|Twój wpis|Înregistrarea ta
+Text / Messwert|Text / measurement|Metin / ölçüm değeri|Текст / измерение|Tekst / wartość pomiaru|Text / valoare măsurată
+Deinen Wert eintragen|Enter your value|Değerini gir|Введите значение|Wpisz wartość|Introdu valoarea
+Schriftgröße im PDF|PDF font size|PDF yazı boyutu|Размер шрифта в PDF|Rozmiar czcionki w PDF|Dimensiunea fontului în PDF
+Breite des Eintrags|Entry width|Giriş genişliği|Ширина записи|Szerokość wpisu|Lățimea înregistrării
+Position fein einstellen|Fine-tune position|Konumu ayarla|Уточнить положение|Dostosuj pozycję|Ajustează poziția
+Diesen Eintrag entfernen|Remove this entry|Bu girişi kaldır|Удалить эту запись|Usuń ten wpis|Elimină această înregistrare
+Tippe auf der Vorlage in ein freies Feld oder auf ein Kästchen. Zum Ändern wählst du deinen Eintrag erneut aus.|Tap an empty field or box on the template. Select your entry again to edit it.|Şablondaki boş alana veya kutuya dokun. Düzenlemek için girişini tekrar seç.|Нажмите пустое поле или клетку шаблона. Для изменения снова выберите запись.|Dotknij pustego pola lub kratki. Aby zmienić wpis, wybierz go ponownie.|Atinge un câmp liber sau o căsuță. Selectează din nou înregistrarea pentru modificare.
+Protokoll speichern|Save report|Formu kaydet|Сохранить протокол|Zapisz protokół|Salvează protocolul
+Ausgefülltes PDF herunterladen|Download completed PDF|Doldurulmuş PDF'yi indir|Скачать заполненный PDF|Pobierz wypełniony PDF|Descarcă PDF-ul completat
+Speicherung auf diesem Gerät. Kein automatischer Versand, keine technische Freigabe.|Saved on this device. No automatic sending or technical approval.|Bu cihazda kayıt. Otomatik gönderim veya teknik onay yok.|Сохранение на устройстве. Без автоматической отправки и технического утверждения.|Zapis na urządzeniu. Bez automatycznej wysyłki ani zatwierdzenia technicznego.|Salvare pe acest dispozitiv. Fără trimitere automată sau aprobare tehnică.
+Prüfprotokolle als PDF|Inspection reports as PDFs|PDF kontrol formları|Протоколы проверки в PDF|Protokoły kontroli w PDF|Protocoale de verificare în PDF
+Füge vorhandene PDF-Dateien zu diesem Auftrag hinzu.|Attach existing PDF files to this job.|Mevcut PDF dosyalarını bu iş emrine ekle.|Добавьте имеющиеся PDF к этой заявке.|Dodaj istniejące pliki PDF do zlecenia.|Atașează fișiere PDF existente la această comandă.
+＋ Prüfprotokoll als PDF anhängen|＋ Attach inspection PDF|＋ PDF kontrol formu ekle|＋ Прикрепить протокол PDF|＋ Załącz protokół PDF|＋ Atașează protocol PDF
+Nur auf diesem Gerät gespeichert. Kein Versand an die KI. Je Datei höchstens 20 MB.|Saved only on this device. Not sent to AI. Up to 20 MB per file.|Yalnızca bu cihazda kaydedilir. Yapay zekâya gönderilmez. Dosya başına en fazla 20 MB.|Только на этом устройстве. Не передаётся ИИ. До 20 МБ на файл.|Zapis tylko na tym urządzeniu. Bez wysyłania do AI. Maks. 20 MB na plik.|Salvat doar pe acest dispozitiv. Nu este trimis la IA. Cel mult 20 MB per fișier.
+Noch keine PDF angehängt.|No PDF attached yet.|Henüz PDF eklenmedi.|PDF ещё не прикреплён.|Nie załączono jeszcze PDF.|Niciun PDF atașat încă.
+Öffnen / herunterladen|Open / download|Aç / indir|Открыть / скачать|Otwórz / pobierz|Deschide / descarcă
+Entfernen|Remove|Kaldır|Удалить|Usuń|Elimină
+KI-Zuordnung und Berichtstext|AI assignment and report text|Yapay zekâ sınıflandırması ve rapor metni|Распределение данных и текст отчёта с ИИ|Przypisanie AI i tekst raportu|Clasificare IA și textul raportului
+Der Originaltext bleibt erhalten. Ein Vorschlag wird erst nach deiner Übernahme in die Berichtsfelder eingetragen.|The original text is kept. A suggestion is entered into the report fields only after you accept it.|Orijinal metin korunur. Öneri yalnızca kabul ettikten sonra rapor alanlarına yazılır.|Исходный текст сохраняется. Предложение попадёт в поля отчёта только после принятия.|Oryginalny tekst pozostaje. Propozycja trafi do pól raportu dopiero po jej przyjęciu.|Textul original se păstrează. Propunerea intră în câmpurile raportului doar după acceptare.
+Sprache für den Bericht|Report language|Rapor dili|Язык отчёта|Język raportu|Limba raportului
+KI erstellt einen Vorschlag …|AI is preparing a suggestion …|Yapay zekâ öneri hazırlıyor …|ИИ готовит предложение …|AI przygotowuje propozycję …|IA pregătește o propunere …
+KI noch nicht freigeschaltet. Manuell dokumentieren ist weiterhin möglich.|AI is not enabled yet. Manual documentation remains available.|Yapay zekâ henüz etkin değil. Elle belgeleme mümkündür.|ИИ ещё не включён. Документацию можно вести вручную.|AI nie jest jeszcze włączona. Dokumentacja ręczna nadal działa.|IA nu este încă activată. Documentarea manuală rămâne disponibilă.
+KI bereit · nur freigegebene künstliche Testdaten verwenden.|AI ready · use approved artificial test data only.|Yapay zekâ hazır · yalnızca onaylı yapay test verilerini kullan.|ИИ готов · используйте только разрешённые искусственные данные.|AI gotowa · używaj wyłącznie zatwierdzonych sztucznych danych.|IA pregătită · utilizează doar date de test fictive aprobate.
+KI-Vorschlag erstellen|Create AI suggestion|Yapay zekâ önerisi oluştur|Создать предложение ИИ|Utwórz propozycję AI|Generează propunere IA
+Neuen KI-Vorschlag erstellen|Create new AI suggestion|Yeni yapay zekâ önerisi oluştur|Создать новое предложение ИИ|Utwórz nową propozycję AI|Generează o nouă propunere IA
+Vorschlag noch nicht geprüft. Kontrolliere Zuordnung und Formulierung.|Suggestion not reviewed yet. Check assignment and wording.|Öneri henüz kontrol edilmedi. Sınıflandırmayı ve ifadeyi kontrol et.|Предложение ещё не проверено. Проверьте распределение и формулировки.|Propozycja niesprawdzona. Skontroluj przypisanie i sformułowania.|Propunere neverificată. Verifică clasificarea și formularea.
+Der Originaltext wurde geändert. Erstelle einen neuen Vorschlag.|The original text has changed. Create a new suggestion.|Orijinal metin değişti. Yeni öneri oluştur.|Исходный текст изменён. Создайте новое предложение.|Tekst oryginalny zmieniono. Utwórz nową propozycję.|Textul original a fost modificat. Generează o nouă propunere.
+Ursprüngliche Stichpunkte|Original notes|Orijinal notlar|Исходные заметки|Oryginalne notatki|Notițele originale
+Rückfragen – bitte klären|Questions – please clarify|Sorular – lütfen açıklığa kavuştur|Вопросы — уточните|Pytania – proszę wyjaśnić|Întrebări – te rugăm să clarifici
+Auch ein KI-Vorschlag kann Fehler enthalten. Kontrolliere technische Aussagen, Werte und Einheiten vor der Übernahme.|AI suggestions can contain errors. Check technical statements, values and units before accepting.|Yapay zekâ önerisi hatalar içerebilir. Kabul etmeden önce teknik ifadeleri, değerleri ve birimleri kontrol et.|Предложение ИИ может содержать ошибки. Проверьте технические утверждения, значения и единицы перед принятием.|Propozycja AI może zawierać błędy. Sprawdź stwierdzenia techniczne, wartości i jednostki przed przyjęciem.|Propunerea IA poate conține erori. Verifică afirmațiile tehnice, valorile și unitățile înainte de acceptare.
+Vorschlag übernehmen|Accept suggestion|Öneriyi kabul et|Принять предложение|Przyjmij propozycję|Acceptă propunerea
+Vorschlag verwerfen|Discard suggestion|Öneriyi reddet|Отклонить предложение|Odrzuć propozycję|Respinge propunerea
+Vorherige Berichtsfelder wiederherstellen|Restore previous report fields|Önceki rapor alanlarını geri getir|Восстановить прежние поля отчёта|Przywróć poprzednie pola raportu|Restabilește câmpurile anterioare
+Dein Originaltext bleibt erhalten. Die Berichtsfelder kannst du jederzeit selbst bearbeiten.|Your original text is kept. You can edit the report fields at any time.|Orijinal metnin korunur. Rapor alanlarını istediğin zaman düzenleyebilirsin.|Исходный текст сохраняется. Поля отчёта можно редактировать в любой момент.|Oryginalny tekst pozostaje. Pola raportu możesz edytować w każdej chwili.|Textul original se păstrează. Poți edita oricând câmpurile raportului.
+KI für Testdaten freischalten|Enable AI for test data|Test verileri için yapay zekâyı aç|Включить ИИ для тестовых данных|Włącz AI dla danych testowych|Activează IA pentru date de test
+Der Text wird zur Zuordnung und Formulierung an OpenAI gesendet. PDF-Anhänge werden nicht übertragen.|The text is sent to OpenAI for assignment and wording. PDF attachments are not transferred.|Metin sınıflandırma ve ifade düzenleme için OpenAI'a gönderilir. PDF ekleri aktarılmaz.|Текст передаётся OpenAI для распределения и формулировки. PDF не передаются.|Tekst jest wysyłany do OpenAI w celu przypisania i sformułowania. Pliki PDF nie są przesyłane.|Textul este trimis la OpenAI pentru clasificare și formulare. PDF-urile nu sunt transmise.
+KI-Zugangscode|AI access code|Yapay zekâ erişim kodu|Код доступа к ИИ|Kod dostępu do AI|Cod de acces IA
+Ich verwende ausschließlich künstliche Testdaten.|I am using artificial test data only.|Yalnızca yapay test verileri kullanıyorum.|Я использую только искусственные тестовые данные.|Używam wyłącznie sztucznych danych testowych.|Folosesc exclusiv date de test fictive.
+Den Zugangscode erhältst du von der Projektverwaltung. Er bleibt nur in dieser geöffneten Sitzung.|Get the access code from the project administrator. It stays only in this open session.|Erişim kodunu proje yöneticisinden al. Kod yalnızca bu açık oturumda kalır.|Код выдаёт администратор проекта. Он хранится только в открытой сессии.|Kod otrzymasz od administratora projektu. Pozostaje tylko w otwartej sesji.|Codul este furnizat de administratorul proiectului. Rămâne doar în această sesiune deschisă.
+Vorschlag erstellen|Create suggestion|Öneri oluştur|Создать предложение|Utwórz propozycję|Generează propunerea
+Abbrechen|Cancel|İptal|Отмена|Anuluj|Anulează
+KI-Vorschlag erstellt. Noch nicht geprüft.|AI suggestion created. Not reviewed yet.|Yapay zekâ önerisi oluşturuldu. Henüz kontrol edilmedi.|Предложение ИИ создано. Ещё не проверено.|Utworzono propozycję AI. Jeszcze niesprawdzona.|Propunerea IA a fost creată. Încă neverificată.
+Vorschlag übernommen. Bestätige den Bericht nach deiner abschließenden Kontrolle.|Suggestion accepted. Confirm the report after your final review.|Öneri kabul edildi. Son kontrolden sonra raporu onayla.|Предложение принято. Подтвердите отчёт после окончательной проверки.|Propozycję przyjęto. Potwierdź raport po końcowej kontroli.|Propunere acceptată. Confirmă raportul după verificarea finală.
+Vorschlag verworfen. Deine Berichtsfelder bleiben erhalten.|Suggestion discarded. Your report fields are kept.|Öneri reddedildi. Rapor alanların korunur.|Предложение отклонено. Поля отчёта сохранены.|Propozycję odrzucono. Pola raportu pozostają zachowane.|Propunere respinsă. Câmpurile raportului se păstrează.
+KI nicht verfügbar. Deine Angaben bleiben erhalten. Bitte manuell dokumentieren oder erneut versuchen.|AI unavailable. Your details are kept. Document manually or try again.|Yapay zekâ kullanılamıyor. Bilgilerin korunur. Elle belgele veya tekrar dene.|ИИ недоступен. Данные сохранены. Заполните вручную или повторите.|AI niedostępna. Dane są zachowane. Uzupełnij ręcznie lub spróbuj ponownie.|IA indisponibilă. Datele sunt păstrate. Documentează manual sau încearcă din nou.
+Beschreibe zuerst deinen Einsatz oder probiere das Beispiel aus.|Describe your service visit first or try the example.|Önce servis çalışmanı anlat veya örneği dene.|Сначала опишите работу или попробуйте пример.|Najpierw opisz pracę lub wypróbuj przykład.|Descrie mai întâi intervenția sau încearcă exemplul.
+PDF-Anhänge auf diesem Gerät gespeichert. Gleiche Dateien werden nicht doppelt angehängt.|PDF attachments saved on this device. Identical files are not attached twice.|PDF ekleri bu cihazda kaydedildi. Aynı dosyalar iki kez eklenmez.|PDF сохранены на устройстве. Одинаковые файлы не дублируются.|Pliki PDF zapisano na urządzeniu. Te same pliki nie są dodawane dwukrotnie.|PDF-urile sunt salvate pe acest dispozitiv. Fișierele identice nu sunt atașate de două ori.
+Anhang vom Auftrag entfernt. Die Originaldatei bleibt erhalten.|Attachment removed from job. The original file is kept.|Ek iş emrinden kaldırıldı. Orijinal dosya korunur.|Вложение удалено из заявки. Исходный файл сохранён.|Załącznik usunięto ze zlecenia. Oryginalny plik pozostaje.|Atașamentul a fost eliminat din comandă. Fișierul original se păstrează.
+Bitte eine PDF-Datei bis 20 MB auswählen.|Please select a PDF up to 20 MB.|Lütfen en fazla 20 MB PDF seç.|Выберите PDF размером до 20 МБ.|Wybierz PDF do 20 MB.|Selectează un PDF de cel mult 20 MB.
+Diese Datei ist keine gültige PDF-Datei. Bitte die Originaldatei prüfen.|This is not a valid PDF file. Please check the original.|Bu geçerli bir PDF dosyası değil. Lütfen orijinali kontrol et.|Это некорректный PDF. Проверьте исходный файл.|To nie jest prawidłowy PDF. Sprawdź oryginalny plik.|Acest fișier nu este un PDF valid. Verifică fișierul original.
+Die Originalvorlagen bleiben in deutscher Sprache.|The original templates remain in German.|Orijinal şablonlar Almanca kalır.|Исходные шаблоны остаются на немецком.|Oryginalne szablony pozostają po niemiecku.|Șabloanele originale rămân în germană.
+Noch offene Rückfragen|Outstanding questions|Açık sorular|Неуточнённые вопросы|Niewyjaśnione pytania|Întrebări rămase deschise
+Anlagentyp:|Equipment type:|Ekipman tipi:|Тип оборудования:|Typ urządzenia:|Tipul instalației:
+Seriennummer:|Serial number:|Seri numarası:|Серийный номер:|Numer seryjny:|Număr de serie:
+Standort: Technikraum · künstliche Testangabe|Location: plant room · fictional test data|Konum: teknik oda · kurgusal test verisi|Место: техническое помещение · тестовые данные|Lokalizacja: pomieszczenie techniczne · dane fikcyjne|Locație: cameră tehnică · date fictive
+Schmutzwasserpumpe|Wastewater pump|Atık su pompası|Насос сточных вод|Pompa ściekowa|Pompă de apă uzată
+Hebeanlage|Lifting station|Terfi tesisi|Подъёмная установка|Przepompownia|Stație de pompare
+Pumpensteuerung|Pump control|Pompa kumandası|Управление насосом|Sterowanie pompą|Sistem de comandă a pompei
+Reparatur Schmutzwasserpumpe|Wastewater pump repair|Atık su pompası onarımı|Ремонт насоса сточных вод|Naprawa pompy ściekowej|Reparație pompă de apă uzată
+Inspektion Hebeanlage|Lifting station inspection|Terfi tesisi kontrolü|Осмотр подъёмной установки|Inspekcja przepompowni|Inspecție stație de pompare
+Störung Pumpensteuerung|Pump control fault|Pompa kumandası arızası|Неисправность управления насосом|Usterka sterowania pompą|Defecțiune sistem comandă pompă
+Neuer Serviceeinsatz|New service visit|Yeni servis işi|Новый сервисный выезд|Nowa interwencja serwisowa|Intervenție de service nouă
+Anfahrt zum Einsatz|Directions to the job|İş yerine ulaşım|Проезд к объекту|Dojazd do miejsca pracy|Deplasare la intervenție
+Einsatzadresse|Job address|İş yeri adresi|Адрес объекта|Adres miejsca pracy|Adresa intervenției
+Straße, Hausnummer, PLZ und Ort|Street, number, postcode and city|Sokak, numara, posta kodu ve şehir|Улица, дом, индекс и город|Ulica, numer, kod i miejscowość|Stradă, număr, cod poștal și localitate
+Die Route öffnet in Google Maps. Erst beim Öffnen wird die Zieladresse an Google übergeben. Deinen Startpunkt wählst du dort.|The route opens in Google Maps. The destination is sent to Google only when opened. Choose your starting point there.|Rota Google Maps'te açılır. Hedef adres yalnızca açıldığında Google'a gönderilir. Başlangıç noktasını orada seç.|Маршрут откроется в Google Maps. Адрес передаётся Google только при открытии. Начальную точку выберите там.|Trasa otwiera się w Google Maps. Adres trafia do Google dopiero po otwarciu. Tam wybierzesz punkt startowy.|Traseul se deschide în Google Maps. Adresa este transmisă doar la deschidere. Alegi acolo punctul de plecare.
+Route in Google Maps öffnen|Open route in Google Maps|Rotayı Google Maps'te aç|Открыть маршрут в Google Maps|Otwórz trasę w Google Maps|Deschide traseul în Google Maps
+Einmal sprechen. Alles erfassen.|Speak once. Capture everything.|Bir kez söyle. Her şeyi kaydet.|Скажите один раз. Запишите всё.|Powiedz raz. Zapisz wszystko.|Spune o dată. Înregistrează totul.
+Hier wird der spätere Sprachablauf gezeigt. Es findet keine Aufnahme statt.|This shows the planned voice workflow. No recording takes place.|Planlanan ses akışı gösterilir. Kayıt yapılmaz.|Здесь показан будущий голосовой ввод. Запись не ведётся.|To podgląd planowanej obsługi głosowej. Nagrywanie nie jest prowadzone.|Aici se prezintă fluxul vocal planificat. Nu se efectuează înregistrări.
+Mit einem künstlichen Beispiel kannst du sehen, wie Befund, Arbeiten, Material, alle Zeiten und Kilometer zusammen geprüft werden.|A fictional example shows how findings, work, materials, all times and kilometres are reviewed together.|Kurgusal örnek, bulguların, işlerin, malzemenin, sürelerin ve kilometrenin birlikte kontrolünü gösterir.|Вымышленный пример показывает совместную проверку состояния, работ, материалов, времени и километров.|Fikcyjny przykład pokazuje wspólne sprawdzanie stanu, prac, materiałów, czasu i kilometrów.|Un exemplu fictiv arată verificarea împreună a constatărilor, lucrărilor, materialelor, duratelor și kilometrilor.
+Beispiel einsetzen|Insert example|Örneği yerleştir|Вставить пример|Wstaw przykład|Inserează exemplul
+Künstliches Beispiel eingesetzt. Jetzt kannst du die Angaben prüfen.|Fictional example inserted. You can now review the details.|Kurgusal örnek eklendi. Şimdi bilgileri kontrol edebilirsin.|Вымышленный пример вставлен. Теперь проверьте данные.|Wstawiono fikcyjny przykład. Możesz sprawdzić dane.|Exemplu fictiv inserat. Acum poți verifica datele.
+Vorhandene Berichtsfelder durch den geprüften Vorschlag ersetzen? Die bisherigen Angaben bleiben im Verlauf erhalten.|Replace existing report fields with the reviewed suggestion? Previous entries are kept in history.|Mevcut rapor alanları kontrol edilen öneriyle değiştirilsin mi? Önceki bilgiler geçmişte korunur.|Заменить поля проверенным предложением? Прежние данные сохранятся в истории.|Zastąpić pola sprawdzoną propozycją? Poprzednie dane pozostaną w historii.|Înlocuiești câmpurile cu propunerea verificată? Datele anterioare se păstrează în istoric.
+Deine Eingaben durch das künstliche Beispiel ersetzen?|Replace your input with the fictional example?|Girişlerin kurgusal örnekle değiştirilsin mi?|Заменить ваши данные вымышленным примером?|Zastąpić Twoje dane fikcyjnym przykładem?|Înlocuiești datele introduse cu exemplul fictiv?
+Protokoll abgewählt. Deine Einträge bleiben erhalten.|Report deselected. Your entries are kept.|Form seçimi kaldırıldı. Girişlerin korunur.|Выбор протокола отменён. Записи сохранены.|Protokół odznaczony. Wpisy zachowano.|Protocol deselectat. Înregistrările sunt păstrate.
+Zugangscode eingeben und künstliche Testdaten bestätigen.|Enter access code and confirm artificial test data.|Erişim kodunu gir ve yapay test verilerini onayla.|Введите код и подтвердите искусственные тестовые данные.|Wpisz kod i potwierdź sztuczne dane testowe.|Introdu codul și confirmă datele de test fictive.
+KI-Zugangscode ungültig. Bitte erneut eingeben.|Invalid AI access code. Please enter it again.|Yapay zekâ erişim kodu geçersiz. Tekrar gir.|Неверный код доступа к ИИ. Введите снова.|Nieprawidłowy kod dostępu do AI. Wpisz ponownie.|Cod IA incorect. Introdu-l din nou.
+Der Vorschlag hat die Werteprüfung nicht bestanden. Bitte manuell dokumentieren oder erneut versuchen.|The suggestion failed the value check. Document manually or try again.|Öneri değer kontrolünü geçemedi. Elle belgele veya tekrar dene.|Предложение не прошло проверку значений. Заполните вручную или повторите.|Propozycja nie przeszła kontroli wartości. Uzupełnij ręcznie lub spróbuj ponownie.|Propunerea nu a trecut verificarea valorilor. Documentează manual sau reîncearcă.
+KI gerade ausgelastet oder Nutzungslimit erreicht. Bitte später erneut versuchen.|AI busy or usage limit reached. Please try later.|Yapay zekâ meşgul veya kullanım sınırına ulaşıldı. Daha sonra dene.|ИИ занят или достигнут лимит. Повторите позже.|AI zajęta lub osiągnięto limit. Spróbuj później.|IA ocupată sau limita atinsă. Reîncearcă mai târziu.
+Die Angaben wurden zwischenzeitlich geändert. Bitte einen neuen Vorschlag erstellen.|The details have changed. Please create a new suggestion.|Bilgiler değişti. Yeni öneri oluştur.|Данные изменились. Создайте новое предложение.|Dane uległy zmianie. Utwórz nową propozycję.|Datele au fost modificate. Generează o nouă propunere.
+PDF-Speicher nicht verfügbar. Bitte die Originaldatei behalten und erneut versuchen.|PDF storage unavailable. Keep the original file and try again.|PDF kaydı kullanılamıyor. Orijinal dosyayı tut ve tekrar dene.|Хранилище PDF недоступно. Сохраните оригинал и повторите.|Magazyn PDF niedostępny. Zachowaj oryginał i spróbuj ponownie.|Stocarea PDF indisponibilă. Păstrează originalul și reîncearcă.
+PDF konnte nicht gespeichert oder geöffnet werden. Die Originaldatei bleibt unverändert.|PDF could not be saved or opened. The original file is unchanged.|PDF kaydedilemedi veya açılamadı. Orijinal dosya değişmedi.|Не удалось сохранить или открыть PDF. Оригинал не изменён.|Nie udało się zapisać lub otworzyć PDF. Oryginał bez zmian.|PDF-ul nu a putut fi salvat sau deschis. Originalul nu este modificat.
+PDF nicht gefunden. Bitte erneut anhängen.|PDF not found. Please attach it again.|PDF bulunamadı. Tekrar ekle.|PDF не найден. Прикрепите снова.|Nie znaleziono PDF. Załącz ponownie.|PDF negăsit. Atașează-l din nou.
+Es fehlen Angaben zum Einsatz. Gehe zurück zur Dokumentation.|Job details are missing. Return to documentation.|Servis bilgileri eksik. Belgelemeye geri dön.|Нет данных о работе. Вернитесь к документации.|Brak danych o pracy. Wróć do dokumentacji.|Lipsesc datele intervenției. Revino la documentare.
+Eine Vorlage zum Auftrag auswählen oder eine vorhandene PDF anhängen.|Select a template for this job or attach an existing PDF.|Bu iş için şablon seç veya mevcut PDF ekle.|Выберите шаблон для заявки или прикрепите PDF.|Wybierz szablon lub załącz istniejący PDF.|Selectează un șablon sau atașează un PDF existent.
+Vorlagen auswählen|Select templates|Şablon seç|Выбрать шаблоны|Wybierz szablony|Selectează șabloane
+Für diktierten Text kannst du die Diktierfunktion deiner Tablet-Tastatur verwenden. Die eigene Mikrofonaufnahme ist noch eine Demo.|Use your tablet keyboard's dictation for spoken text. The built-in recording is still a demo.|Konuşma metni için tablet klavyesinin diktesini kullanabilirsin. Uygulamanın kendi kaydı hâlâ demodur.|Для диктовки используйте функцию клавиатуры планшета. Запись в приложении пока демонстрационная.|Do dyktowania użyj funkcji klawiatury tabletu. Nagrywanie w aplikacji nadal jest demonstracją.|Pentru dictare poți folosi funcția tastaturii tabletei. Înregistrarea proprie a aplicației este încă demonstrativă.
+Ohne KI kannst du alle Berichtsfelder selbst ausfüllen.|You can complete all report fields manually without AI.|Yapay zekâ olmadan tüm rapor alanlarını kendin doldurabilirsin.|Без ИИ все поля можно заполнить вручную.|Bez AI możesz ręcznie wypełnić wszystkie pola raportu.|Fără IA poți completa manual toate câmpurile raportului.
+Die Berichts- und PDF-Inhalte werden durch die Sprachwahl nicht automatisch übersetzt.|Changing the interface language does not automatically translate report or PDF contents.|Arayüz dili seçimi rapor veya PDF içeriğini otomatik çevirmez.|Выбор языка интерфейса не переводит отчёты и PDF автоматически.|Zmiana języka interfejsu nie tłumaczy automatycznie raportów ani plików PDF.|Schimbarea limbii interfeței nu traduce automat rapoartele sau PDF-urile.
+`;
+const uiDictionary=new Map(translationRows.trim().split('\n').map(row=>{const parts=row.split('|');if(parts.length!==6)throw Error('Invalid translation row: '+parts[0]);return [parts[0],Object.fromEntries(['en','tr','ru','pl','ro'].map((key,i)=>[key,parts[i+1]]))]}));
+function uiText(source){
+ if(appLanguage==='de')return source;
+ const direct=uiDictionary.get(source)?.[appLanguage];if(direct)return direct;
+ const orderSuffix=source.match(/^(.* · )Auftrag (.+)$/);if(orderSuffix)return orderSuffix[1]+uiText('Auftrag')+' '+orderSuffix[2];
+ const pageCount=source.match(/^(\d+) Seiten? · (.+)$/);if(pageCount){const pageWord={en:'page(s)',tr:'sayfa',ru:'стр.',pl:'str.',ro:'pag.'};return pageCount[1]+' '+pageWord[appLanguage]+' · '+pageCount[2].split(', ').map(uiText).join(', ')}
+ const selectLabel=source.match(/^(.+) auswählen$/);if(selectLabel){const verbs={en:'Select',tr:'Seç',ru:'Выбрать',pl:'Wybierz',ro:'Selectează'};return verbs[appLanguage]+': '+selectLabel[1]}
+ const previewLabel=source.match(/^Vorschau: (.+)$/);if(previewLabel){const words={en:'Preview',tr:'Önizleme',ru:'Предпросмотр',pl:'Podgląd',ro:'Previzualizare'};return words[appLanguage]+': '+previewLabel[1]}
+ const entryPage=source.match(/^(Häkchen|Textfeld) auf Seite (\d+)$/);if(entryPage){const phrases={en:['Check mark','Text field','on page'],tr:['Onay işareti','Metin alanı','sayfa'],ru:['Галочка','Текстовое поле','на странице'],pl:['Znacznik','Pole tekstowe','na stronie'],ro:['Bifă','Câmp text','pe pagina']},p=phrases[appLanguage];return p[entryPage[1]==='Häkchen'?0:1]+' '+p[2]+' '+entryPage[2]}
+ // Navigation arrows and variable counters keep their values unchanged.
+ const arrow=source.match(/^(←\s*)?(.+?)(\s*[→↗])?$/);
+ if(arrow&&(arrow[1]||arrow[3])){const translated=uiDictionary.get(arrow[2])?.[appLanguage];if(translated)return (arrow[1]||'')+translated+(arrow[3]||'')}
+ const patterns=[[/^Auftrag (.+)$/,'Auftrag'],[/^(Anlagentyp:|Seriennummer:) (.+)$/,'label'],[/^(\d+) Protokoll\(e\) diesem Einsatz zugeordnet\.$/,'assigned'],[/^(\d+) Protokoll\(e\) ausgewählt$/,'selected'],[/^Seite (\d+) \/ (\d+)$/,'page'],[/^(\d+) (Vorlage|Vorlagen) · (\d+) ausgewählt$/,'count']];
+ for(const [regex,key] of patterns){const m=source.match(regex);if(!m)continue;
+  if(key==='Auftrag')return uiText('Auftrag')+' '+m[1];if(key==='label')return uiText(m[1])+' '+m[2];
+  const templates={assigned:{en:'{1} report(s) assigned to this job.',tr:'Bu işe {1} form atandı.',ru:'К заявке добавлено протоколов: {1}.',pl:'Protokoły przypisane do zlecenia: {1}.',ro:'{1} protocoale atribuite intervenției.'},selected:{en:'{1} report(s) selected',tr:'{1} form seçildi',ru:'Выбрано протоколов: {1}',pl:'Wybrano protokoły: {1}',ro:'{1} protocoale selectate'},page:{en:'Page {1} / {2}',tr:'Sayfa {1} / {2}',ru:'Страница {1} / {2}',pl:'Strona {1} / {2}',ro:'Pagina {1} / {2}'},count:{en:'{1} templates · {3} selected',tr:'{1} şablon · {3} seçildi',ru:'Шаблонов: {1} · выбрано: {3}',pl:'Szablony: {1} · wybrano: {3}',ro:'{1} șabloane · {3} selectate'}};
+  return templates[key][appLanguage].replace(/\{(\d+)\}/g,(_,i)=>m[Number(i)]);
+ }
+ return source;
+}
+const translatedNodes=new WeakMap(),translatedAttributes=new WeakMap();
+function applyLanguage(){
+ document.documentElement.lang=appLanguage;
+ const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+ while(walker.nextNode()){
+  const node=walker.currentNode,el=node.parentElement;
+  if(!el||el.closest('script,style,textarea,[data-no-translate],.original,.page-mark,.protocol-title'))continue;
+  const old=translatedNodes.get(node);const source=old&&old.target===node.nodeValue?old.source:node.nodeValue;
+  const trimmed=source.trim();if(!trimmed)continue;
+  if(el.tagName==='OPTION'&&!el.hasAttribute('value'))el.setAttribute('value',source);
+  const result=source.replace(trimmed,uiText(trimmed));translatedNodes.set(node,{source,target:result});if(node.nodeValue!==result)node.nodeValue=result;
+ }
+ for(const el of document.querySelectorAll('[placeholder],[aria-label],[title],[alt]')){
+  if(el.closest('[data-no-translate]'))continue;
+  const cache=translatedAttributes.get(el)||{};
+  for(const attr of ['placeholder','aria-label','title','alt']){const value=el.getAttribute(attr);if(value===null)continue;const old=cache[attr],source=old?.target===value?old.source:value,target=uiText(source);cache[attr]={source,target};if(value!==target)el.setAttribute(attr,target)}
+  translatedAttributes.set(el,cache);
+ }
+ const select=$('#app-language');if(select&&select.value!==appLanguage)select.value=appLanguage;
+}
+function setAppLanguage(value){if(!appLanguages.some(([key])=>key===value))return;appLanguage=value;try{localStorage.setItem('mangold-language',value)}catch{}applyLanguage()}
+function installLanguageControl(){const control=document.createElement('div');control.className='language-control';control.innerHTML=`<label for="app-language">Sprache</label><select id="app-language" onchange="setAppLanguage(this.value)">${appLanguages.map(([key,name])=>`<option value="${key}">${name}</option>`).join('')}</select>`;document.querySelector('.header-right').prepend(control);applyLanguage();new MutationObserver(()=>applyLanguage()).observe(document.body,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['placeholder','aria-label','title','alt']})}

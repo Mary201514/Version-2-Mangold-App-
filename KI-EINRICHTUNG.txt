@@ -1,0 +1,48 @@
+Mangold App – KI, Sprachen und PDF-Anhänge – 26.10.2026
+
+Die KI-Anbindung ist vorbereitet und standardmäßig ausgeschaltet.
+Noch erforderlich: Freigabe des externen KI-Dienstes und der Kosten sowie
+sichere Einrichtung durch die Projektverwaltung. Keine Schlüssel im Chat teilen.
+
+Nach Freigabe in Vercel unter Project Settings / Environment Variables setzen:
+OPENAI_API_KEY: Schlüssel eines freigegebenen OpenAI-Projekts
+OPENAI_MODEL: freigegebenes Modell mit Responses API und Structured Outputs
+MANGOLD_AI_ACCESS_CODE: eigener zufälliger Zugangscode mit mindestens 16 Zeichen
+MANGOLD_AI_ENABLED: true
+Danach neu bereitstellen. Zugangscode getrennt an berechtigte Tester weitergeben.
+Kostenlimit im OpenAI-Projekt festlegen. Nur künstliche Testdaten verwenden.
+
+Die öffentliche App enthält keinen API-Schlüssel. Ohne vollständige Einrichtung
+ist auch der Serverendpunkt deaktiviert. Zugriffscode wird nur im Arbeitsspeicher
+der geöffneten App gehalten; Text wird erst bei der Vorschlagerstellung gesendet.
+Kein automatischer Versand von Kundenstammdaten oder PDF-Anhängen.
+
+Beim Schritt „Angaben prüfen“ wird der KI-Vorschlag automatisch angefordert,
+sofern der Dienst eingerichtet ist. Befund und Arbeiten werden ausformuliert;
+Material und Zeitangaben bleiben wörtlich. Originalbelege werden mitgeliefert.
+Technische Zahlen-/Einheitenprüfung ist eine zusätzliche Prüfung, keine Garantie
+gegen semantische Fehler. Jeder Vorschlag muss manuell kontrolliert werden.
+Übernehmen und Verwerfen sind getrennte Aktionen. Vorherige Berichtsfelder bleiben
+im lokalen Verlauf erhalten. Abschlussbestätigung ist separat.
+
+Deutsch ist feste Berichtssprache und Oberflächenstandard. Die Bedienoberfläche
+ist wählbar (DE, EN, TR, RU, PL, RO).
+Sprachwechsel übersetzt keine bestehenden Originaltexte, Berichtsfelder oder PDFs.
+Die firmeneigenen PDF-Vorlagen bleiben im deutschen Original.
+Eigene Mikrofonaufnahme ist weiterhin Demo. Tablet-Tastaturdiktat kann zur
+Texteingabe verwendet werden; dessen Verarbeitung richtet sich nach dem Gerät.
+
+PDF-Anhänge: im Browser in IndexedDB, pro Auftrag, bis 20 MB je Datei;
+SHA-256 verhindert doppelte Anhänge desselben Inhalts am selben Auftrag.
+PDF-Originale werden weder verändert noch hochgeladen. Anhänge können herunter-
+geladen oder aus dem Auftrag entfernt werden. Originaldateien bleiben erhalten.
+Browserdaten löschen entfernt diese Anhänge. Eine Sicherung/Synchronisierung
+zwischen Geräten ist noch nicht umgesetzt; Originaldateien separat behalten.
+
+Offen vor betrieblichem Einsatz: Dienstfreigabe, echter KI-Probelauf, Kostenlimit,
+Benutzerrechte/Anmeldung statt Testzugangscode, Sicherung und Wiederherstellung,
+Sprachprüfung durch Muttersprachler, echte Aufnahmefunktion, Offline-Gesamtkonzept.
+
+Technische Dokumentation:
+https://developers.openai.com/api/docs/guides/structured-outputs
+https://vercel.com/docs/functions/runtimes/node-js

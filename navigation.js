@@ -4,11 +4,11 @@ resetForOrder=function(order){
   const key=jobKeyFor(order);
   state.jobDrafts=state.jobDrafts||{};
   if(state.jobSelected||state.savedAt||state.text||Object.keys(state.fields).length){
-    state.jobDrafts[currentJobKey()]=structuredClone({order:state.order,text:state.text,fields:state.fields,checked:state.checked,date:state.date,monteur:state.monteur,savedAt:state.savedAt});
+    state.jobDrafts[currentJobKey()]=structuredClone({order:state.order,text:state.text,fields:state.fields,checked:state.checked,date:state.date,monteur:state.monteur,savedAt:state.savedAt,aiProposal:state.aiProposal,aiHistory:state.aiHistory,aiQuestions:state.aiQuestions,reportLanguage:state.reportLanguage});
   }
   const draft=state.jobDrafts[key];
-  if(draft)Object.assign(state,structuredClone(draft));
-  else if(key!==currentJobKey()||!state.jobSelected)Object.assign(state,{order:structuredClone(order),text:'',fields:{},checked:false,savedAt:null});
+  if(draft)Object.assign(state,{aiProposal:null,aiHistory:[],aiQuestions:[],reportLanguage:'de'},structuredClone(draft));
+  else if(key!==currentJobKey()||!state.jobSelected)Object.assign(state,{order:structuredClone(order),text:'',fields:{},checked:false,savedAt:null,aiProposal:null,aiHistory:[],aiQuestions:[],reportLanguage:'de'});
   state.jobSelected=true;
   dirty=true;
   if(location.hash==='#auftrag')render();else location.hash='auftrag';

@@ -1,4 +1,6 @@
 Mangold App Version 2
-Stand: 22. Oktober 2026
+Stand: 26. Oktober 2026
 Gestaltungsentwurf mit künstlichen Testdaten.
-Sprache und KI sind Demonstrationen. Speicherung erfolgt lokal im Browser.
+Sechs Oberflächensprachen, PDF-Anhänge je Auftrag und vorbereitete KI-Anbindung.
+Berichte bleiben auf Deutsch. KI-Dienst nicht freigegeben oder aktiviert.
+Eigene Mikrofonaufnahme weiterhin Demo. Speicherung lokal im Browser.

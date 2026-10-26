@@ -1,0 +1,49 @@
+Mangold App Version 2 – 26. Oktober 2026
+
+Umgesetzt:
+- Oberflächensprache Deutsch (Standard), Englisch, Türkisch, Russisch,
+  Polnisch und Rumänisch. Auswahl bleibt auf diesem Gerät erhalten.
+- Berichtssprache auf Nutzerwunsch fest Deutsch. Sprachwechsel verändert
+  keine gespeicherten Berichtsfelder, Originaltexte oder PDF-Inhalte.
+- In der Dokumentation PDF-Prüfprotokolle anhängen, auftragsbezogen lokal
+  speichern, erneut herunterladen und vom Auftrag entfernen.
+- PDF-Speicherung in IndexedDB; gleicher Dateiinhalt erzeugt am selben
+  Auftrag keine doppelte Anlage. Höchstens 20 MB je Datei.
+- Serverseitige KI-Anbindung vorbereitet: automatische Anfrage beim Schritt
+  „Angaben prüfen“, getrennte editierbare Vorschläge, Originalbelege,
+  Rückfragen, Übernehmen/Verwerfen, Verlauf bisheriger Berichtsfelder.
+- Nur Befund und ausgeführte Arbeiten dürfen ausformuliert werden;
+  Material, Zeiten und Kilometer werden aus Originalzitaten übernommen.
+- Zahlen, technische Codes und erkannte Einheiten werden zusätzlich geprüft.
+- Ohne Freigabe und vollständige Serverkonfiguration keine OpenAI-Anfragen.
+  Server benötigt einen eigenen Testzugangscode, keinen Browser-API-Schlüssel.
+- Vorbereitetes Beispiel bleibt ausdrücklich als künstliche Demo erkennbar.
+
+Durchgeführt:
+- Neun automatisierte Node-Tests erfolgreich, ohne echte KI-Anfragen:
+  Werte-/Quellenprüfung, Ablehnen veränderter Werte, Zugangsprüfung,
+  feste deutsche Berichtssprache, Übernehmen/Verwerfen/Wiederherstellen,
+  verspätete Antworten bei geändertem Text, Verbindungsfehler, Sprachdaten.
+- JavaScript-Syntax, Build und Git-Diff-Prüfung erfolgreich.
+- Browser mit Tablet-Viewport 1024 x 768: Sprachwechsel in alle sechs
+  Sprachen, Originaltext und Wert „1,5 Stunden“ unverändert.
+- Englische Protokollfilter funktionieren mit ursprünglichen Auswahlwerten.
+- Berichtsfelder speichern, neu laden und zwischen Aufträgen wechseln:
+  Angaben wieder vorhanden.
+- PDF anhängen, erneut anhängen: genau eine Anlage.
+- Neuladen: PDF weiter vorhanden. Download per SHA-256 identisch zur Quelle.
+- Anderer Auftrag: dort kein Anhang des ersten Auftrags sichtbar.
+- Lokalen Server gezielt unterbrochen: manuelle Bearbeitung und lokale
+  Speicherung weiter möglich. Verbindung anschließend wiederhergestellt.
+
+Noch offen:
+- Kein echter KI-Probelauf: Kosten-/Dienstfreigabe und sicher eingerichteter
+  Schlüssel fehlen. KI bleibt ausgeschaltet.
+- Eigene Mikrofonaufnahme weiterhin Demo; Texteingabe/Tastaturdiktat möglich.
+- Muttersprachliche Prüfung der Übersetzungen und Erprobung auf den realen
+  Monteur-Tablets stehen aus.
+- Keine neue vollständige Offline-Installation, Geräte-Synchronisierung,
+  Supabase- oder ERP-Anbindung. PDF-Originale separat aufbewahren.
+- Vor Betrieb: Benutzerrechte, Datensicherung und Datenschutz abstimmen.
+
+Einrichtung und Grenzen: KI-EINRICHTUNG.txt
