@@ -1,0 +1,37 @@
+Manueller Export zur KI-Auswertung – 26.10.2026
+
+In „Dokumentation“ und am Ende der Prüfansicht:
+„KI-Auswertung exportieren“ öffnen. Vorschau prüfen und den Auswertungstext
+kopieren, eine Textdatei oder eine JSON-Datei herunterladen. Anschließend selbst
+in ChatGPT Business einfügen bzw. hochladen. Kein automatischer Versand und kein
+kostenpflichtiger API-Aufruf für diesen Export.
+
+Enthalten ist ausschließlich der aktuell geöffnete Einsatz:
+- Auftrags-/Kundendaten, Anlage, Typ, Seriennummer, Datum, Monteur und Hinweise.
+- Unverändertes Originaldiktat sowie die bearbeiteten Berichtsfelder getrennt.
+- Vollständiger Außendienstbericht und bereits gespeicherte Rückfragen.
+- Eingegebene freie Texte und gesetzte Häkchen der Prüfprotokolle mit Vorlage,
+  Seitenindex und Position. Abgewählte Protokolle bleiben als abgewählt markiert.
+- Dateinamen und Metadaten lokaler PDF-Anhänge, soweit deren Liste lesbar ist.
+
+Nicht enthalten: Original-PDFs, PDF-Inhalte/Dateianhänge als Binärdateien,
+andere Einsätze, Bearbeitungsverläufe und noch nicht übernommene KI-Vorschläge.
+Benötigte PDF-Dateien separat in ChatGPT bereitstellen. Texte/Häkchen können ohne
+Originalvorlage nicht verlässlich einzelnen Prüfpunkten zugeordnet werden.
+
+Fehlende Angaben werden nicht zu „0“, „keine Mängel“ oder „Prüfung bestanden“.
+Der beigefügte Auswertungsauftrag verlangt die Trennung von Quellen, Widersprüchen
+und Rückfragen sowie den Erhalt technischer Werte und Begriffe.
+Die Antwort wird nicht automatisch in die App übernommen.
+
+Geprüft:
+- 23 automatisierte Tests erfolgreich, einschließlich bestehender KI-/Business-
+  Funktionen sowie sechs neuer Tests zum Export und seiner Datenabgrenzung.
+- Browser: Export aus ausgefüllter Prüfansicht geöffnet, Vorschau gelesen,
+  Kopieren erfolgreich, TXT- und JSON-Dateien heruntergeladen.
+- Heruntergeladene TXT und JSON verglichen: identische Exportdaten.
+- Arbeitszeit „1,5 Stunden“, Originaldiktat und gespeicherter Test-Protokolleintrag
+  unverändert in den Downloads vorhanden.
+- Syntax und Build geprüft.
+
+Für die Entwicklung und den Monteur-Test weiterhin künstliche Daten verwenden.
