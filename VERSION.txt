@@ -4,3 +4,7 @@ Gestaltungsentwurf mit künstlichen Testdaten.
 Sechs Oberflächensprachen, PDF-Anhänge je Auftrag und vorbereitete KI-Anbindung.
 Berichte bleiben auf Deutsch. KI-Dienst nicht freigegeben oder aktiviert.
 Eigene Mikrofonaufnahme weiterhin Demo. Speicherung lokal im Browser.
+
+Diktat-Test: Windows + H / Tastaturmikrofon, ChatGPT-Business-Rückgabe
+mit Feldübernahme oder vollständigem Bericht am Ende des AD-Formulars.
+Keine direkte Mikrofonaufnahme oder automatische ChatGPT-Verbindung.

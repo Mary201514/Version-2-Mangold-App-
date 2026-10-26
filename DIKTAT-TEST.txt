@@ -1,0 +1,67 @@
+Mangold App – Diktat-Test mit Monteur – 26.10.2026
+
+Ziel: Mit künstlichen Daten prüfen, ob Diktieren, Ausformulieren und die
+Übernahme ins Außendienstformular Arbeit sparen. Keine API aktivieren.
+
+Windows-Tablet / Edge:
+1. Auftrag öffnen und „Dokumentation starten“ wählen.
+2. „Alles auf einmal sprechen“ wählen: Das Textfeld erhält den Eingabefokus.
+   Windows + H drücken oder das Mikrofon der Bildschirmtastatur antippen.
+   Windows-Diktat benötigt Internet, Mikrofon und aktivierte Onlinespracherkennung.
+   Die Anwendung selbst startet keine Mikrofonaufnahme.
+3. Befund, Arbeiten, Material, Zeiten und km zusammen diktieren. Erkannten Text
+   prüfen; besonders Zahlen, Einheiten, Artikel- und Seriennummern.
+4. Im Bereich „Monteur-Test mit ChatGPT Business“ den vorbereiteten Auftrag
+   kopieren. Dadurch wird der lokale Entwurf zuerst gespeichert.
+5. ChatGPT öffnen, euren Business-Arbeitsbereich wählen, Auftrag einfügen und
+   absenden. Alternativ oben noch keinen Text eingeben und nach der Anweisung
+   direkt in ChatGPT diktieren. Sprachverfügbarkeit hängt von Gerät/Konto ab.
+6. Die vollständige ChatGPT-Antwort in „Ergebnis aus ChatGPT Business“ einfügen.
+7. „Zuordnung prüfen“ wählen. Vorschlag und Rückfragen kontrollieren.
+   Vorhandene Angaben werden nur nach zusätzlicher Bestätigung ersetzt.
+8. „Geprüften Vorschlag übernehmen“: Die zugehörigen Felder werden befüllt.
+   Der vollständige Bericht steht zusätzlich am Ende des Außendienstformulars.
+   Dort kann er bearbeitet, gespeichert und nach Neuladen weiterbearbeitet werden.
+
+Wenn ChatGPT nur normalen Berichtstext zurückgibt:
+„Nur als vollständigen Bericht prüfen“ wählen. Die strukturierten Felder bleiben
+bei dieser Übernahme erhalten. Den vollständigen Bericht unten prüfen und speichern.
+
+Ohne ChatGPT:
+„Ohne ChatGPT testen“ öffnen und „Diktat als Außendienstbericht prüfen“ wählen.
+So lässt sich die unveränderte Spracheingabe am Formularende übernehmen.
+Dabei erfolgt weder Ausformulierung noch automatische Zuordnung.
+
+Später iPad:
+Textfeld antippen, Mikrofon der Bildschirmtastatur verwenden. Falls ausgeblendet,
+Diktierfunktion in Einstellungen / Allgemein / Tastatur prüfen. Die gleiche
+ChatGPT-Rückgabe kann anschließend in die App eingefügt werden.
+
+Testnotizen außerhalb der App:
+- Zeit für den bisherigen handschriftlichen Ablauf und für den Diktat-Ablauf.
+- Welche Wörter, Zahlen oder Einheiten mussten korrigiert werden?
+- War die Zuordnung richtig? Wie aufwendig war Kopieren/Einfügen?
+- War das Formularende als vollständiger Bericht ausreichend?
+
+Technisch geprüft:
+- 17 automatisierte Tests zu Quellen, Werten, Auftragsbindung, Verwerfen,
+  ausdrücklicher Übernahme, Wiederherstellung und Fehlerfällen bestanden.
+- Browser: Textfeld-Fokus, Diktierhinweis und Vorschau einer künstlich
+  vorbereiteten ChatGPT-Rückgabe sichtbar geprüft.
+- Die anschließende vollständige Browserprüfung wurde durch eine blockierte
+  Browserbestätigung im älteren Testtab unterbrochen. Die neue Fassung ersetzt
+  diesen Dialog durch ein Auswahlkästchen direkt im Vorschlag.
+
+Noch nicht geprüft:
+- Echtes gesprochenes Diktat mit eurem Windows-Tablet/Mikrofon.
+- Tatsächliche ChatGPT-Business-Antwort auf den vorbereiteten Auftrag.
+- Vollständiger Durchlauf auf Edge und iPad durch einen Monteur.
+Diese Punkte sind Zweck des gemeinsamen Praxistests, keine zugesicherte Prüfung.
+
+Speicherung nur im jeweiligen Browser; keine Gerätesynchronisierung.
+Windows-Diktat verwendet Microsoft-Onlinedienste. Unternehmensdaten erst nach
+betrieblicher Freigabe verwenden. Keine kostenpflichtige OpenAI-API aktiviert.
+
+Anleitungen:
+https://support.microsoft.com/en-us/accessibility/windows/use-voice-typing-to-talk-instead-of-type-on-your-pc
+https://support.apple.com/de-de/guide/ipad/ipad997d9642/ipados
