@@ -18,7 +18,7 @@ home=function(){return previousHome()
   .replace('href="#inspektion"','href="#einstieg" onclick="state.mode=\'Inspektion\'"')
   .replace('<a class="subtle" href="#entwuerfe">Meine Entwürfe →</a>',`<a class="choice new-ad-choice" href="#neu">${icon('plus')}<span><strong>Neuer AD erstellen</strong><small>Kunde und Anlage selbst auswählen</small></span><span class="arrow">›</span></a>`)};
 
-headerSteps=function(active){return `<nav class="steps journey-steps" aria-label="Schritte im Auftrag">${[['auftrag','Auftrag'],['dokumentation','Dokumentation'],['pruefen','Prüfen']].map(([route,label],index)=>`<a href="#${route}" ${active===index+1?'aria-current="step"':''}><span class="step-number">${index+1}</span><strong>${label}</strong></a>`).join('<i aria-hidden="true">›</i>')}</nav>`};
+headerSteps=function(active){return `<nav class="steps journey-steps" aria-label="Schritte im Auftrag">${[['auftrag','Auftrag'],['dokumentation','Dokumentation'],['pruefen','Prüfen'],['nachweis','Formular']].map(([route,label],index)=>`<a href="#${route}" ${active===index+1?'aria-current="step"':''}><span class="step-number">${index+1}</span><strong>${label}</strong></a>`).join('<i aria-hidden="true">›</i>')}</nav>`};
 
 const initialNewJob=newJob;
 newJob=function(){return initialNewJob().replace('href="#einstieg">← Zurück','href="#start">← Startseite').replace('<select id="customer">','<select id="customer" onchange="state.pendingCustomer=this.value">').replace(/<option value="(\d+)"/g,(match,index)=>match+(String(state.pendingCustomer||'0')===index?' selected':''))};
@@ -54,7 +54,8 @@ function flowSettings(){
   neu:{back:'start',action:'new',label:'Einsatz beginnen',hint:'Kunde und Anlage auswählen'},
   auftrag:{back:state.order.id?'auftraege':'neu',next:'dokumentation',label:'Dokumentation starten',hint:'Nächster Schritt'},
   dokumentation:{back:'auftrag',action:'review',label:'Angaben prüfen',hint:'Nächster Schritt'},
-  pruefen:{back:'dokumentation',action:state.checked?'return':'confirm',label:state.checked?'Zur Auftragsübersicht':'Angaben geprüft bestätigen',hint:state.checked?'Deine Angaben sind bestätigt':'Nächster Schritt'},
+  pruefen:{back:'dokumentation',action:'confirm',label:'Formular anzeigen',hint:'Angaben übernehmen'},
+  nachweis:{back:'pruefen',next:'auftrag',label:'Zur Auftragsübersicht',hint:'Ausgefüllter Außendienst-Nachweis'},
   protokolle:{back:'auftrag',action:'selection',label:'Auswahl speichern · zum Auftrag',hint:`${jobProtocols().length} Protokoll(e) ausgewählt`},
   formular:{back:'protokolle',action:'protocol',label:'Speichern · zum Auftrag',hint:'Protokoll bearbeiten'},
   inspektion:{back:'start',next:'einstieg',label:'Auftrag auswählen',hint:'Inspektion zum Auftrag'},
