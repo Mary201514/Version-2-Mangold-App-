@@ -1,7 +1,7 @@
 // Screen navigation and reversible protocol selection share the existing draft.
 function jobKeyFor(order){return order.id||`${order.customer}|${order.plant}`}
 resetForOrder=function(order){
-  const key=jobKeyFor(order);
+  const key=jobKeyFor(order);protocolReturn='auftrag';
   state.jobDrafts=state.jobDrafts||{};
   if(state.jobSelected||state.savedAt||state.text||Object.keys(state.fields).length){
     state.jobDrafts[currentJobKey()]=structuredClone({order:state.order,text:state.text,fields:state.fields,checked:state.checked,date:state.date,monteur:state.monteur,savedAt:state.savedAt,aiProposal:state.aiProposal,aiHistory:state.aiHistory,aiQuestions:state.aiQuestions,reportLanguage:state.reportLanguage,adReport:state.adReport,businessPaste:state.businessPaste,businessCandidate:state.businessCandidate,businessHistory:state.businessHistory});
@@ -41,7 +41,7 @@ catalogResults=function(){const list=protocolCatalog.filter(p=>(protocolFilter.f
 const initialCatalog=catalogView;
 catalogView=function(category){return initialCatalog(category)
  .replace("topBar('start','Startseite')",'')
- .replace('href="#start">← Startseite','href="#auftrag">← Zum Auftrag')
+ .replace('href="#start">← Startseite',`href="#${protocolReturn}">← ${protocolReturn==='dokumentation'?'Zur Dokumentation':'Zum Auftrag'}`)
  .replace('Wähle die passende Vorlage, füge sie zum Einsatz hinzu und fülle sie direkt aus.','Wähle die passenden Protokolle für diesen Auftrag. Du kannst sie jederzeit wieder abwählen.')};
 
 function flowSettings(){
@@ -54,8 +54,8 @@ function flowSettings(){
   auftrag:{back:state.order.id?'auftraege':'neu',next:'dokumentation',label:'Dokumentation starten',hint:'Nächster Schritt'},
   dokumentation:{back:'auftrag',action:'review',label:'Angaben prüfen',hint:'Nächster Schritt'},
   pruefen:{back:'dokumentation',action:state.checked?'return':'confirm',label:state.checked?'Zur Auftragsübersicht':'Angaben geprüft bestätigen',hint:state.checked?'Deine Angaben sind bestätigt':'Nächster Schritt'},
-  protokolle:{back:'auftrag',action:'selection',label:'Auswahl speichern · zum Auftrag',hint:`${jobProtocols().length} Protokoll(e) ausgewählt`},
-  formular:{back:'protokolle',action:'protocol',label:'Speichern · zum Auftrag',hint:'Protokoll bearbeiten'},
+  protokolle:{back:protocolReturn,action:'selection',label:protocolReturn==='dokumentation'?'Auswahl speichern · zur Dokumentation':'Auswahl speichern · zum Auftrag',hint:`${jobProtocols().length} Protokoll(e) ausgewählt`},
+  formular:{back:'protokolle',action:'protocol',label:protocolReturn==='dokumentation'?'Speichern · zur Dokumentation':'Speichern · zum Auftrag',hint:'Protokoll bearbeiten'},
   inspektion:{back:'start',next:'einstieg',label:'Auftrag auswählen',hint:'Inspektion zum Auftrag'},
   entwuerfe:{back:'start',next:'auftrag',label:'Zum Auftrag',hint:'Entwurf weiterbearbeiten'}
  };return {route,...(map[route]||map.start)};
@@ -70,10 +70,10 @@ function flowNext(){
   case 'selection':{
    const records=jobProtocols(),old=records.map(r=>r.savedAt);
    records.forEach(r=>r.savedAt=new Date().toISOString());save();
-   if(storageOK)location.hash='auftrag';else records.forEach((r,i)=>r.savedAt=old[i]);
+   if(storageOK)location.hash=protocolReturn;else records.forEach((r,i)=>r.savedAt=old[i]);
    break;
   }
-  case 'protocol':if(protocolRecord()){saveProtocol();if(storageOK)location.hash='auftrag'}break;
+  case 'protocol':if(protocolRecord()){saveProtocol();if(storageOK)location.hash=protocolReturn}break;
  }
 }
 function updateFlowNav(){let nav=$('#flow-nav');if(!nav){nav=document.createElement('nav');nav.id='flow-nav';nav.className='flow-nav';nav.setAttribute('aria-label','Vor und zurück');document.body.append(nav)}const flow=flowSettings();nav.innerHTML=`<button class="secondary flow-back" ${!flow.back?'disabled':''} onclick="location.hash='${flow.back||'start'}'">← Zurück</button><div class="flow-position"><span>${esc(flow.hint)}</span><small>Deine Eingaben bleiben beim Wechsel erhalten.</small></div><button class="primary flow-next" ${!flow.next&&!flow.action?'disabled':''} onclick="flowNext()">${esc(flow.label)} <span aria-hidden="true">→</span></button>`}

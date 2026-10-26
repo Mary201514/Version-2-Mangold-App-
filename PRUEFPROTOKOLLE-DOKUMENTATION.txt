@@ -1,0 +1,23 @@
+Prüfprotokolle direkt in der Dokumentation – 26.10.2026
+
+Auf Nutzerwunsch:
+- Eigener Bereich „Beschreibbare Prüfprotokolle“ oben in der Dokumentation.
+- Direkter Zugriff auf die 31 bereits hinterlegten Originalvorlagen.
+- Auswahl nach Anlage / Bereich / Suchbegriff über den bestehenden Katalog.
+- Ausgewählte Protokolle erscheinen am Auftrag und in der Dokumentation;
+  dort direkt weiter ausfüllen oder abwählen. Abwählen erhält Einträge.
+- Nach Auswahl oder Bearbeitung zurück zur Dokumentation, wenn dort begonnen.
+- Zugang über die Auftragsübersicht führt weiterhin zur Auftragsübersicht zurück.
+- Neue Beschriftungen in allen sechs Oberflächensprachen ergänzt.
+
+Geprüft:
+- JavaScript-Syntax und Build erfolgreich.
+- 31 PDFs und 69 Vorschaubilder vorhanden.
+- Browser: Dokumentation → Vorlagenauswahl; 31 Vorlagen sichtbar.
+- Filter „Aqualift F Compact“ liefert die passende vorhandene Vorlage.
+- Öffnen, künstlichen Testeintrag setzen und speichern erfolgreich.
+- Rückkehr zur Dokumentation mit ausgewähltem Protokoll erfolgreich.
+- Protokoll erneut öffnen und neu laden: Testeintrag weiterhin vorhanden.
+
+Original-PDFs und deren technische Inhalte wurden nicht verändert.
+Die Speicherung der Einträge erfolgt weiterhin lokal im jeweiligen Browser.

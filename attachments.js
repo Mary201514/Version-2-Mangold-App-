@@ -1,3 +1,8 @@
+let protocolReturn='auftrag';
+function documentProtocolPanel(){
+ const ready=typeof jobProtocols==='function'&&typeof attachedCards==='function';
+ return `<section class="panel documentation-protocols"><div class="heading-row"><div><h2>Beschreibbare Prüfprotokolle</h2><p>Wähle eine hinterlegte Vorlage und fülle sie direkt im Auftrag aus.</p></div><a class="primary" href="#protokolle" onclick="protocolReturn='dokumentation'">Prüfprotokolle auswählen und ausfüllen →</a></div>${ready?attachedCards():''}</section>`;
+}
 // PDF bytes stay in IndexedDB, separately from the small text draft.
 let pdfDatabase;
 function openPdfDatabase(){
