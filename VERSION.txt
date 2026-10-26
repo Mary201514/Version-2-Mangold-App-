@@ -8,3 +8,10 @@ Eigene Mikrofonaufnahme weiterhin Demo. Speicherung lokal im Browser.
 Diktat-Test: Windows + H / Tastaturmikrofon, ChatGPT-Business-Rückgabe
 mit Feldübernahme oder vollständigem Bericht am Ende des AD-Formulars.
 Keine direkte Mikrofonaufnahme oder automatische ChatGPT-Verbindung.
+
+Fortlaufendes Diktat: lokale Entwurfspeicherung, gezielte deutsche Korrekturbefehle,
+Ergänzungen, Rückfragen, Rückgängig und ausdrücklicher Demo-Abschluss ohne Pflichtfelder.
+Prüfung: 38 automatisierte Tests bestanden; Akzeptanzdialog, erneutes Öffnen,
+Tastaturkorrektur/Rückgängig und Demo-Abschluss im Browser geprüft.
+Echter Mikrofon-Test auf Windows-Tablet/Edge und iPad steht noch aus.
+Details: DIKTAT-KORREKTUREN.txt

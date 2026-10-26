@@ -4,3 +4,5 @@ const renderBeforeFeatures=render;
 render=function(){renderBeforeFeatures();refreshAttachments();applyLanguage()};
 getAiConfig();
 render();
+
+installDictation();

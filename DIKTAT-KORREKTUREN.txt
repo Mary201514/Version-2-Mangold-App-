@@ -1,0 +1,26 @@
+Mangold App Version 2 – fortlaufendes Diktat, 26.10.2026
+
+Umgesetzt
+- Entwurf automatisch nach Eingaben, beim Bildschirmwechsel und beim Verlassen der Seite lokal speichern; Speicherfehler und parallele Änderungen anderer Tabs blockieren stilles Überschreiben.
+- Text und letzte Cursorposition bleiben erhalten. Auftragsspezifische Korrekturen, Rückfragen und Rückgängig-Verlauf werden mitgespeichert.
+- Neue vollständige Sätze nach zwei Sekunden Pause lokal zuordnen; alternativ „Neue Angaben zuordnen“. „Angaben prüfen“ stößt die Zuordnung ebenfalls an.
+- Explizite Korrekturen ersetzen nur das genannte Feld. Ergänzungen werden angehängt. Zahlen, Einheiten und Codes werden wörtlich erhalten, auch ausgeschriebene Zeiten.
+- Unklare Angaben: Abschnitt auswählen; bis zur vollständigen Klärung keine Berichtsfelder ändern. Verwerfen erhält den Diktattext.
+- Betriebsstunden als zusätzliches beschreibbares Feld, auch im KI-Export.
+- „Letzte Änderung rückgängig machen“ als Sprachbefehl und Schaltfläche, letzte 50 Berichtsfeld-Änderungen; ursprüngliches Diktat bleibt erhalten.
+- Tastaturbearbeitung aller Berichtsfelder bleibt möglich. Frühere Fassungen bei Änderungen am Diktat werden lokal aufbewahrt.
+- Demo-Abschluss nur durch explizite Schaltfläche oder separaten Befehl „Bericht abschließen“. Vorerst keine Pflichtfelder (Freigabe der Nutzerin). Offene Zuordnungen/Rückfragen und erkannte Probelauf-Widersprüche verhindern den Abschluss. Weitere Bearbeitung öffnet wieder einen Entwurf.
+
+Grenzen
+- Lokale deutsche Befehls- und Begriffserkennung, keine allgemeine semantische KI. Nicht erkannte Formulierungen erfordern eine Abschnittsauswahl. Widersprüche werden nicht umfassend fachlich erkannt: Monteur muss prüfen.
+- Keine neue API oder Kosten aktiviert. Die Spracherkennung selbst erfolgt weiterhin über Windows + H bzw. das Tastaturmikrofon des Geräts. Dafür können die bereits erläuterten Gerätedienste Internet benötigen.
+- Fortlaufende Speicherung funktioniert für bereits geladene App lokal ohne API. Erneutes Laden der Website ohne Internet und geräteübergreifende Entwürfe sind nicht implementiert.
+- Ursprünglicher Text und geänderte Berichtsfelder bleiben getrennte Quellen. Der vollständige Außendienstbericht wird nach Feldänderungen nicht automatisch überschrieben und muss ebenfalls kontrolliert werden.
+- Bei Speicher-Konflikt: aktuellen Inhalt exportieren, erst danach neu laden und Fassungen vergleichen.
+- Browser-Tests verwenden künstliche Texteingaben; echter Mikrofon-/Windows-Edge-/iPad-Test mit Monteur bleibt erforderlich.
+
+Prüfung
+- Automatisierter Akzeptanzdialog einschließlich Motorprüfung, Lagerwechsel, Korrektur zwei auf drei Stunden, Probelauf-Ergänzung.
+- Automatisierte Prüfungen für gezielte Betriebsstunden-Korrektur, Material-Ergänzung, Rückfragen ohne Teiländerung, veraltete Antworten, Rückgängig, fortlaufendes Speichern, unveränderte Ursprungsfassungen, Abschluss ohne Pflichtfelder, blockierenden Widerspruch und Tab-Konflikt.
+- Bestehende Tests für manuelle ChatGPT-Business-Übernahme, Werteprüfung und KI-Export.
+- Browser: Akzeptanzdialog, korrekt zugeordnete Berichtsfelder und erneutes Öffnen mit unveränderten gespeicherten Angaben.
