@@ -1,7 +1,7 @@
 function focusDictation(){
  const input=$('#transcript');if(!input)return;input.focus();const caret=state.dictationCaret||{start:input.value.length,end:input.value.length};input.setSelectionRange(caret.start,caret.end);
  $('#dictation-help')?.removeAttribute('hidden');
- toast('Windows: Windows + H drücken oder das Mikrofon der Bildschirmtastatur antippen. iPad: Mikrofon auf der Tastatur antippen.');
+ toast('Android: Mikrofon der Bildschirmtastatur antippen. Windows: Windows + H. iPad: Tastaturmikrofon.');
 }
 function businessPrompt(){
  const shape={format:MangoldBusinessBridge.format,job:currentJobKey(),originaltext:'Unverändertes Diktat',fields:Object.fromEntries(fields.filter(([key])=>key!=='betriebsstunden').map(([key])=>[key,{value:'',sources:[]}])),report:'',questions:[]};

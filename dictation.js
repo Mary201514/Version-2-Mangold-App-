@@ -30,7 +30,7 @@ function undoDictation(){
  const old=state.speechHistory?.pop();if(!old){speechFeedback('Keine vorherige Änderung zum Wiederherstellen vorhanden.');save(true);return}
  Object.assign(state,old);mark();state.completedAt=old.completedAt;state.checked=old.checked;state.speechPending=null;state.speechNotice='Letzte Änderung rückgängig gemacht. Dein ursprüngliches Diktat bleibt erhalten.';save(true);render();toast(state.speechNotice);
 }
-function transcriptInput(input){if(!input.value.startsWith(state.text||'')&&state.text&&!transcriptEditActive){state.originalInputs=state.originalInputs||[];if(state.originalInputs.at(-1)!==state.text)state.originalInputs.push(state.text);transcriptEditActive=true}state.text=input.value;state.dictationCaret={start:input.selectionStart,end:input.selectionEnd};mark();clearTimeout(dictationTimer);if(/[.!?]\s*$/.test(input.value))dictationTimer=setTimeout(processDictation,2000)}
+function transcriptInput(input,event){if(!input.value.startsWith(state.text||'')&&state.text&&!transcriptEditActive){state.originalInputs=state.originalInputs||[];if(state.originalInputs.at(-1)!==state.text)state.originalInputs.push(state.text);transcriptEditActive=true}state.text=input.value;state.dictationCaret={start:input.selectionStart,end:input.selectionEnd};mark();clearTimeout(dictationTimer);if(!event?.isComposing&&/[.!?]\s*$/.test(input.value))dictationTimer=setTimeout(processDictation,2000)}
 function originalVersions(){return state.originalInputs?.length?`<details><summary>Frühere ursprüngliche Eingaben ansehen</summary>${state.originalInputs.map(text=>`<div class="original" data-no-translate>${esc(text)}</div>`).join('')}</details>`:''}
 function completionQuestions(){
  const questions=[...(state.aiQuestions||[])];if(state.speechPending)questions.push('Bitte die offene Zuordnung zuerst klären oder verwerfen.');
@@ -59,6 +59,7 @@ function installDictation(){
  document.addEventListener('select',e=>{if(e.target.id==='transcript'){state.dictationCaret={start:e.target.selectionStart,end:e.target.selectionEnd};dirty=true;clearTimeout(draftTimer);draftTimer=setTimeout(()=>save(true),350)}});
  window.addEventListener('pagehide',()=>{if(dirty)save(true)});
  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&dirty)save(true)});
+ document.addEventListener('compositionend',e=>{if(e.target.id==='transcript')transcriptInput(e.target)});
  document.addEventListener('focusout',e=>{if(e.target.id==='transcript')transcriptEditActive=false});
  window.addEventListener('hashchange',()=>{clearTimeout(dictationTimer);if(dirty)save(true)});
  render();

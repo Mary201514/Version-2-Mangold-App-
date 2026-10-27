@@ -9,7 +9,8 @@
   const split=new RegExp('(?<=[.!?])\\s+|;\\s*|,\\s*(?=(?:'+names+'|Ich korrigiere|Ich meinte|Füge|Ergänze|Ändere)\\b)','i');
   const explicit=new RegExp('^(?:die |den |das |beim |bei den |bei der )?('+names+')(?:\\s+auf\\b|\\s*[:–-]\\s*|\\s+)([\\s\\S]+)$','i');
   const ops=[],questions=[];
-  for(const original of input.split(split).filter(s=>s.trim())){
+  const separated=input.replace(/\s+(?=(?:Ausgeführte (?:Arbeiten|Tätigkeiten)|Arbeitszeit|Rüstzeit|Wartezeit|Reisezeit hin|Reisezeit rück|Reisezeit zurück|Kilometer|Betriebsstunden|Material)\b)/gi,(space,offset,all)=>{const before=all.slice(0,offset);return /(?:ich korrigiere:?|ich meinte|ändere(?: die| den| das)?|ergänze(?: beim| bei der)?|füge (?:noch )?hinzu:?|außerdem|[,.;:])$/i.test(before.trim())?space:', '});
+  for(const original of separated.split(split).filter(s=>s.trim())){
    let phrase=clean(original),mode='add';
    if(/^(ich korrigiere|ich meinte|ändere)\b/i.test(phrase)){mode='replace';phrase=phrase.replace(/^(?:ich korrigiere|ich meinte|ändere)\s*:?\s*/i,'')}
    phrase=phrase.replace(/^(?:füge (?:noch )?hinzu|außerdem|ergänze)\s*:?\s*/i,'');

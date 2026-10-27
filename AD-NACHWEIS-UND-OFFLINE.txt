@@ -1,0 +1,32 @@
+Mangold App Version 2 – Testfassung 27.10.2026
+
+Für den heutigen Monteur-Test
+1. Die Vercel-Adresse zuerst mit Internet im normalen Browser öffnen. Falls „Neue Version laden“ erscheint, diese Schaltfläche verwenden.
+2. Warten, bis „Offline bereit auf diesem Gerät“ angezeigt wird. Dabei werden App, AD-Vorlage, PDF-Schrift und vorhandene Prüfprotokolle lokal vorbereitet (rund 27 MB). Erst danach die Verbindung unterbrechen.
+3. Auftrag öffnen oder neuen AD-Vorgang anlegen. „Außendienst-Nachweis auswählen“ öffnet eure V4-Originalvorlage mit den vorhandenen Kunden- und Anlagendaten. Fehlende Anschriften/Kundennummern bleiben leer und können ergänzt werden.
+4. „Diktat ergänzen“ öffnen. Android: Textfeld antippen und das Mikrofon der Bildschirmtastatur verwenden (z. B. Gboard). Windows: Windows + H. iPad: Tastaturmikrofon. Mit „Befund …“, „Ausgeführte Arbeiten …“, „Material …“, „Arbeitszeit …“ sind Zuordnungen am eindeutigsten. Unklare Angaben einem Abschnitt zuweisen.
+5. „Angaben prüfen“ → „AD-Nachweis öffnen“ → „AD-PDF herunterladen“. Die heruntergeladene Datei ist eure beschreibbare PDF-Vorlage und keine JSON-Datei. Felder im Formular antippen, um sie vor dem Download in einem großen Eingabefeld zu korrigieren.
+
+Offline und Diktat
+- App erneut öffnen, Auftragsauswahl mit vorbereiteten Testdaten, Berichtsfelder, Korrekturen, lokale Entwürfe, AD-Formular, PDF-Erstellung, mitgelieferte Prüfprotokolle und lokal gespeicherte Anhänge benötigen nach erfolgreicher Vorbereitung keine Verbindung.
+- Die Sprache-zu-Text-Erkennung kommt von der Tastatur des Tablets. Ob sie ohne Netz arbeitet, hängt vom konkreten Gerät, der Tastatur, Sprache und deren Offline-Unterstützung ab. Deshalb vor dem Monteureinsatz auf dem tatsächlichen Android-Tablet im Flugmodus diktieren. Die App lädt kein eigenes Sprachmodell herunter und garantiert kein Offline-Mikrofon für jedes Tablet. Tippen und die weitere Verarbeitung funktionieren offline.
+- Beim ersten Besuch ohne vorherige Vorbereitung kann die App noch nicht offline geladen werden. Gelöschte Browserdaten oder Speicherbereinigung entfernen auch Offline-Dateien/Entwürfe. Das ist keine Datensicherung und keine Gerätesynchronisierung.
+- Externe Routen/ERP und neue Downloads aus nicht vorbereiteten Quellen benötigen weiterhin Netz. Keine ERP-Anbindung oder bezahlte KI-API aktiviert.
+
+Angaben in der V4-Vorlage
+- Kunde/Objekt, vorhandene Anschriften, Auftragsnummer (nur vorhandene), Datum und Monteur werden übernommen. Ein neuer Vorgang erhält keine erfundene ERP-Auftragsnummer.
+- Befund, ausgeführte Arbeiten, Besonderheiten und Betriebsstunden kommen in den Arbeitsbereich; längere Texte werden in der PDF auf Seite 2 bzw. zusätzliche beschreibbare Anlagenseiten fortgesetzt.
+- Arbeitsdauer, Kilometer sowie Rüst-, Warte-, Hin- und Rückreisezeiten werden wörtlich übertragen. Aus Dauerangaben werden keine Uhrzeiten von/bis oder Gesamt-Reisezeiten erfunden.
+- Material: eindeutige Mengen/Einheiten und ausdrücklich genannte Artikelnummern werden getrennt; unklare Materialtexte bleiben wörtlich erhalten. Weitere Materialpositionen stehen auf Seite 2/als Fortsetzung.
+- Seriennummer steht im Feld Hersteller/Bezeichnung, damit sie bei langen Anlagentypen vollständig lesbar bleibt. Unbekannte Hersteller bleiben unbekannt.
+- Unterschriften, Preise, Abnahmen und Prüfergebnisse werden nicht automatisch erzeugt. Abschluss bleibt eine ausdrückliche Bestätigung ohne Pflichtfelder.
+- Manuelle Formularänderungen haben Vorrang und werden als manuell markiert; „Berichtswert übernehmen“ ist eine ausdrückliche Rückkehr zum aktuellen Berichtswert. Änderungen in einer außerhalb der App bearbeiteten PDF werden nicht automatisch zurückimportiert.
+- Für die lokale Zuordnung wird keine KI genutzt. Es wird kein neuer technischer Sachverhalt ausformuliert oder hinzugefügt. ChatGPT-Kopier-/Einfügeschritte sind aus dem normalen Arbeitsablauf entfernt. Der frühere optionale Auswertungsexport bleibt eingeklappt verfügbar.
+
+Geprüft
+- Automatisierte Tests für Feldzuordnung, echte beschreibbare PDF, Kunden-/Vorgangstrennung, manuelle Korrekturen, Unicode, lange Texte/Folgeseiten, getrennte Zeitarten, fehlende Angaben, ausbleibende Unterschriften, Offline-Cache, Offline-Navigation und Ausschluss von API-Daten aus dem Cache; bestehende Regressionstests.
+- Ausgefüllte PDF mit pypdf erneut geöffnet: kanonische Formularwerte und Widget-Werte/Appearance-Streams geprüft. Beide Seiten visuell gerendert; keine abgeschnittenen Werte im Muster.
+- Browser mit abgeschaltetem lokalem Server: App/Formular erneut geöffnet, neuen Testvorgang angelegt, Diktattext einschließlich gezielter Korrektur zugeordnet, AD-Felder vorbefüllt und lokale PDF-Erstellung/Download ausgelöst. Manuelle Formularänderung beim Hin-/Zurück-Wechsel erhalten und rückgängig gemacht.
+- Echte Spracheingabe am Android-Tablet und ein realer Monteur-Praxistest konnten auf diesem Rechner nicht durchgeführt werden. Der Browser-Test verwendet künstlich eingegebenen Diktattext.
+
+Hilfestellung für Android: https://support.google.com/gboard/answer/2781851?hl=de

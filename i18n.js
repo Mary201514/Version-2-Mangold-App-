@@ -434,3 +434,21 @@ Künstliche Demo-Abbildung – kein Foto einer Kundenanlage.|Synthetic demo illu
 Bild konnte nicht geladen werden. Schließe die Ansicht und öffne das Bild erneut.|The image could not be loaded. Close this view and open the image again.|Görsel yüklenemedi. Görünümü kapat ve görseli yeniden aç.|Не удалось загрузить изображение. Закройте просмотр и откройте его снова.|Nie udało się wczytać obrazu. Zamknij podgląd i otwórz obraz ponownie.|Imaginea nu a putut fi încărcată. Închide vizualizarea și deschide imaginea din nou.
 `;
 for(const row of historyTranslationRows.trim().split('\n').filter(row=>row.trim())){const parts=row.split('|');if(parts.length!==6)throw Error('Invalid history translation: '+parts[0]);uiDictionary.set(parts[0],Object.fromEntries(['en','tr','ru','pl','ro'].map((key,index)=>[key,parts[index+1]])))}
+
+const adTranslationRows=`
+Außendienst-Nachweis|Field service record|Saha servis belgesi|Акт выездного обслуживания|Potwierdzenie serwisu|Fișă de intervenție
+Außendienst-Nachweis V4|Field service record V4|Saha servis belgesi V4|Акт выездного обслуживания V4|Potwierdzenie serwisu V4|Fișă de intervenție V4
+Außendienst-Nachweis auswählen|Select service record|Servis belgesini seç|Выбрать акт обслуживания|Wybierz potwierdzenie serwisu|Selectează fișa de intervenție
+AD-Nachweis öffnen|Open service record|Servis belgesini aç|Открыть акт обслуживания|Otwórz potwierdzenie serwisu|Deschide fișa de intervenție
+AD-Nachweis öffnen →|Open service record →|Servis belgesini aç →|Открыть акт обслуживания →|Otwórz potwierdzenie serwisu →|Deschide fișa de intervenție →
+AD-PDF herunterladen|Download service PDF|Servis PDF'sini indir|Скачать акт в PDF|Pobierz PDF serwisu|Descarcă fișa PDF
+Diktat ergänzen|Continue dictation|Dikteyi tamamla|Дополнить диктовку|Uzupełnij dyktowanie|Completează dictarea
+Berichtswert übernehmen|Use report value|Rapor değerini kullan|Взять значение отчёта|Użyj wartości z raportu|Preia valoarea din raport
+Letzte Formularänderung rückgängig|Undo last form edit|Son form değişikliğini geri al|Отменить изменение формы|Cofnij zmianę formularza|Anulează ultima modificare
+Weitere Exportmöglichkeiten|Other export options|Diğer dışa aktarma seçenekleri|Другие варианты экспорта|Inne opcje eksportu|Alte opțiuni de export
+Offline vorbereiten|Prepare offline use|Çevrimdışı kullanımı hazırla|Подготовить офлайн|Przygotuj tryb offline|Pregătește utilizarea offline
+Offline-Status prüfen|Check offline status|Çevrimdışı durumu kontrol et|Проверить офлайн-статус|Sprawdź tryb offline|Verifică starea offline
+Neue Version laden|Load new version|Yeni sürümü yükle|Загрузить новую версию|Wczytaj nową wersję|Încarcă versiunea nouă
+Dein AD-Nachweis als Formular|Your service record form|Servis belgesi formun|Форма акта обслуживания|Twój formularz serwisu|Formularul fișei tale
+`;
+for(const row of adTranslationRows.trim().split('\n').filter(row=>row.trim())){const parts=row.split('|');if(parts.length!==6)throw Error('Invalid AD translation: '+parts[0]);uiDictionary.set(parts[0],Object.fromEntries(['en','tr','ru','pl','ro'].map((key,index)=>[key,parts[index+1]])))}
