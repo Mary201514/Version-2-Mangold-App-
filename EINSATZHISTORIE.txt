@@ -1,0 +1,24 @@
+Mangold App Version 2 – Vorschau der Anlagenhistorie, 27.10.2026
+
+Umgesetzt
+- Rechts im Auftrag und in der Dokumentation: letzte drei abgeschlossene Testeinsätze der ausgewählten Kunden-Anlagen-Kombination, neueste zuerst.
+- Datum, Einsatzart, Testkennung, kurze Beschreibung und hinterlegte Demo-Abbildungen. Bilder lassen sich in einer separaten Ansicht vergrößern und wieder schließen.
+- Ohne Bilder: eindeutiger Hinweis. Bei unbekannter Kunden-Anlagen-Kombination keine fremden Einträge als Ersatz.
+- Historie ist ausschließlich zum Lesen. Frühere Tätigkeiten oder Ergebnisse werden nicht in den neuen Bericht kopiert.
+- Anzeige und Bildöffnung ändern keine Berichtseingaben. Vorhandene Entwürfe und neue AD-Vorgänge verwenden dieselbe passende Demo-Zuordnung.
+- Neue Oberflächentexte in die vorhandenen sechs Oberflächensprachen aufgenommen; ursprüngliche Inhalte bleiben deutsch/unverändert.
+
+Grenzen und nächster gesonderter Schritt
+- Ausschließlich künstliche Beispieldaten und lokal mitgelieferte SVG-Abbildungen; keine Fotos echter Kundenanlagen.
+- Keine ERP-Schnittstelle, kein ERP-Datenabruf, keine neue externe Verbindung und kein neuer kostenpflichtiger Dienst eingerichtet.
+- Echte Anbindung erst nach Bestätigung des genauen ERP-Produkts, seiner Version und der verfügbaren Schnittstellen. Danach Kundennummer und eindeutige Anlagenkennung fachlich zuordnen; nicht allein über Namen suchen.
+- Der spätere Server muss Zugriffsrechte für Historie UND Bilder prüfen. Die Demo-Auswahl im Browser ist keine produktive Berechtigungsprüfung.
+- Bei echter Verbindung außerdem Ladefehler, Aktualität der Daten, Bildberechtigungen und vereinbartes Offline-Verhalten umsetzen und testen. Übertragung betrieblicher Daten bleibt freigabepflichtig.
+
+Geprüft
+- 46 automatisierte Tests bestanden, davon acht neue für Historienauswahl, Begrenzung auf drei, Sortierung, Kunden-/Anlagentrennung, Ausschluss aktueller/offener Einsätze, fehlende Zuordnung, unveränderte Ursprungsdaten, sichere Demo-Bildpfade und veraltete Bildaktionen.
+- Statischer Build erstellt.
+- Lokaler Browser bei 1024 × 768: Seitenleiste ohne horizontalen Überlauf, drei Einträge, Bilder geladen.
+- Bild geöffnet und geschlossen; Diktat blieb unverändert.
+- Wechsel zwischen zwei künstlichen Kunden/Anlagen: passende Historie in Dokumentation und Auftrag angezeigt.
+- Tatsächliche ERP-Daten und ERP-Zugriffsrechte konnten mangels Anbindung nicht geprüft werden.
