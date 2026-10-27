@@ -452,3 +452,20 @@ Neue Version laden|Load new version|Yeni sürümü yükle|Загрузить н�
 Dein AD-Nachweis als Formular|Your service record form|Servis belgesi formun|Форма акта обслуживания|Twój formularz serwisu|Formularul fișei tale
 `;
 for(const row of adTranslationRows.trim().split('\n').filter(row=>row.trim())){const parts=row.split('|');if(parts.length!==6)throw Error('Invalid AD translation: '+parts[0]);uiDictionary.set(parts[0],Object.fromEntries(['en','tr','ru','pl','ro'].map((key,index)=>[key,parts[index+1]])))}
+
+const fieldVoiceTranslationRows=`
+Diktieren|Dictate|Dikte et|Диктовать|Dyktuj|Dictează
+Schreiben|Type|Yaz|Написать|Wpisz|Scrie
+Diese Zuordnung ist noch offen|This assignment is still pending|Bu sınıflandırma hâlâ açık|Это распределение ещё не подтверждено|To przypisanie jest jeszcze otwarte|Această clasificare este încă deschisă
+Angabe prüfen oder ergänzen|Review or complete entry|Bilgiyi kontrol et veya tamamla|Проверить или дополнить запись|Sprawdź lub uzupełnij wpis|Verifică sau completează înregistrarea
+Unterschriften und lokal speichern|Signatures and local saving|İmzalar ve yerel kayıt|Подписи и локальное сохранение|Podpisy i zapis lokalny|Semnături și salvare locală
+Nachweis lokal speichern|Save record locally|Belgeyi yerel kaydet|Сохранить акт локально|Zapisz dokument lokalnie|Salvează fișa local
+Kunde unterschreibt|Customer signs|Müşteri imzalar|Подпись клиента|Podpis klienta|Semnează clientul
+Monteur unterschreibt|Technician signs|Teknisyen imzalar|Подпись техника|Podpis montera|Semnează tehnicianul
+Unterschrift übernehmen|Accept signature|İmzayı kabul et|Сохранить подпись|Zatwierdź podpis|Preia semnătura
+Neu zeichnen|Draw again|Yeniden çiz|Нарисовать заново|Narysuj ponownie|Desenează din nou
+Erneut unterschreiben|Sign again|Yeniden imzala|Подписать заново|Podpisz ponownie|Semnează din nou
+Noch keine aktuelle Unterschrift|No current signature yet|Henüz güncel imza yok|Актуальной подписи пока нет|Brak aktualnego podpisu|Încă nu există semnătură actuală
+PDF für das Büro herunterladen|Download PDF for the office|Ofis için PDF indir|Скачать PDF для офиса|Pobierz PDF dla biura|Descarcă PDF pentru birou
+`;
+for(const row of fieldVoiceTranslationRows.trim().split('\n').filter(row=>row.trim())){const parts=row.split('|');if(parts.length!==6)throw Error('Invalid field voice translation: '+parts[0]);uiDictionary.set(parts[0],Object.fromEntries(['en','tr','ru','pl','ro'].map((key,index)=>[key,parts[index+1]])))}

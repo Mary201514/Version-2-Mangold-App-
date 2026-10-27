@@ -24,3 +24,8 @@ Demo-Vorschau rechts im Auftrag und in der Dokumentation. Keine ERP-Anbindung.
 beschreibbarer PDF und Offline-Vorbereitung. Keine ChatGPT-Kopierschritte im Hauptablauf.
 Android nutzt das Tastaturmikrofon. Offline-Spracherkennung ist geräteabhängig.
 Anleitung und Grenzen: AD-NACHWEIS-UND-OFFLINE.txt
+
+27.10.2026: Diktieren/Schreiben je Kontrollfeld, verbesserte Zuordnung und
+Handunterschriften für Kunde und Monteur. Lokale PDF-Ablage vor Büroversand.
+75 automatisierte Tests bestanden; Offline-Speichern/Neuladen im Browser geprüft.
+Details: AD-UNTERSCHRIFTEN-UND-DIKTAT.txt

@@ -1,7 +1,8 @@
-(function(root,factory){if(typeof module==='object'&&module.exports)module.exports=factory();else root.MangoldAdPdf=factory()})(this,function(){
+(function(root,factory){if(typeof module==='object'&&module.exports)module.exports=factory(require('./ad-signature-core.js'));else root.MangoldAdPdf=factory(root.MangoldAdSignatures)})(this,function(signatureCore){
  function lineCount(value,width,font,size){let lines=0;for(const paragraph of String(value).split('\n')){let row='';lines++;for(const char of paragraph){if(row&&font.widthOfTextAtSize(row+char,size)>width){lines++;row=char}else row+=char}}return lines}
  function take(value,width,font,size,maxLines){let rows=1,line='',lastSpace=0,i=0;for(const char of value){if(char==='\n'){rows++;line=''}else if(line&&font.widthOfTextAtSize(line+char,size)>width){rows++;line=char}else line+=char;if(/\s/.test(char))lastSpace=i;if(rows>maxLines){const cut=lastSpace>0?lastSpace:i;return [value.slice(0,cut),value.slice(cut).replace(/^\n/,'')]}i+=char.length}return [value,'']}
- async function build({PDFLib,templateBytes,fontBytes,fontkit,values,customer='',job=''}){
+ async function build({PDFLib,templateBytes,fontBytes,fontkit,values,customer='',job='',signatures={},revision=''}){
+  const signatureState=signatureCore.status(values,signatures,revision);if(signatureState.stale.length)throw Error('Der Nachweis wurde nach dem Unterschreiben geändert. Bitte erneut unterschreiben.');
   const {PDFDocument,StandardFonts,rgb}=PDFLib,doc=await PDFDocument.load(templateBytes);
   let font;if(fontBytes&&fontkit){doc.registerFontkit(fontkit);font=await doc.embedFont(fontBytes,{subset:true})}else font=await doc.embedFont(StandardFonts.Helvetica);
   const form=doc.getForm(),prepared={...values},characters=new Set(font.getCharacterSet());
@@ -18,7 +19,12 @@
    if(value&&!fits(size))throw Error('FIELD_TOO_LONG: '+name);
    field.setFontSize(size);field.updateAppearances(font);
   }
-  form.updateFieldAppearances(font);doc.setTitle('Außendienst-Nachweis');doc.setSubject('Lokaler Testnachweis – vor Weitergabe fachlich prüfen');doc.setProducer('Mangold Service-Assistent');return doc.save();
+  form.updateFieldAppearances(font);
+  for(const [role,signature]of Object.entries(signatureState.valid)){
+   const field=form.getTextField(signatureCore.fields[role]);for(const widget of field.acroField.getWidgets()){const mk=widget.dict.lookup(PDFLib.PDFName.of('MK'));if(mk)mk.delete(PDFLib.PDFName.of('BG'));const rect=widget.getRectangle();for(const stroke of signatureCore.paths(signature,rect))for(let i=1;i<stroke.length;i++)doc.getPages()[0].drawLine({start:stroke[i-1],end:stroke[i],thickness:.75,color:rgb(.07,.13,.22)})}field.updateAppearances(font);
+  }
+  if(Object.keys(signatureState.valid).length)for(const field of form.getFields())field.enableReadOnly();
+  doc.setTitle('Außendienst-Nachweis');doc.setSubject(Object.keys(signatureState.valid).length?'Lokal unterschriebene Fassung':'Lokaler Testnachweis – vor Weitergabe fachlich prüfen');doc.setProducer('Mangold Service-Assistent');return doc.save();
  }
  return {build,lineCount};
 });

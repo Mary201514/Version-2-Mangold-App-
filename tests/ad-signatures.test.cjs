@@ -1,0 +1,24 @@
+const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
+const core=require('../ad-signature-core.js'),template=require('../ad-template.js'),report=require('../ad-proof-core.js'),pdf=require('../ad-proof-pdf.js'),PDFLib=require('../vendor/pdf-lib.min.js');
+const state={order:{id:'2026-1042',customer:'Musterfirma GmbH',plant:'Pumpe 2',type:'Pumpe',serial:'SWP-001'},date:'2026-10-27',monteur:'Testmonteur',fields:{arbeiten:'Motor geprüft',arbeit:'3 Stunden',hin:'30 Minuten',rueck:'25 Minuten',km:'62 km'}};
+function ink(values=report.values(state,{},template)){return {aspect:3,strokes:[[{x:.1,y:.3},{x:.3,y:.7},{x:.4,y:.2},{x:.7,y:.6},{x:.9,y:.4}]],signedAt:'2026-10-27T12:00:00.000Z',binding:core.binding(values,template.revision)}}
+test('signatures belong to exact values and template revision; changes invalidate them',()=>{const values=report.values(state,{},template),s=ink(values);assert.ok(core.status(values,{customer:s},template.revision).valid.customer);assert.deepEqual(core.status({...values,stunden:'4 Stunden'},{customer:s},template.revision).stale,['customer']);assert.deepEqual(core.status(values,{customer:s},'other-template').stale,['customer']);assert.deepEqual(core.status({...values,kunde_name:'Anderer Kunde'},{customer:s},template.revision).stale,['customer'])});
+test('invalid, empty, non-finite or out-of-range strokes are rejected',()=>{assert.equal(core.validInk({aspect:3,strokes:[]}),false);for(const p of [{x:NaN,y:.2},{x:1.1,y:.2},{x:.3,y:-1}])assert.equal(core.validInk({...ink(),strokes:[[p,{x:.3,y:.4}]]}),false);assert.equal(core.validInk(ink()),true)});
+test('signature paths preserve proportions and stay inside the original PDF signature box',()=>{const rect={x:42,y:38,width:181,height:30};for(const stroke of core.paths(ink(),rect))for(const p of stroke){assert.ok(p.x>=rect.x&&p.x<=rect.x+rect.width);assert.ok(p.y>=rect.y&&p.y<=rect.y+rect.height)}});
+test('a signed PDF has locked fields while an unsigned draft remains editable; stale ink is rejected',async()=>{const values=report.values(state,{},template),options={PDFLib,templateBytes:fs.readFileSync(path.join(__dirname,'../assets/ad-v4/original.pdf')),fontBytes:fs.readFileSync(path.join(__dirname,'../vendor/DejaVuSans.ttf')),fontkit:require('../vendor/fontkit.min.js'),values,revision:template.revision},signed=await pdf.build({...options,signatures:{customer:ink(values),technician:ink(values)}}),doc=await PDFLib.PDFDocument.load(signed);assert.ok(doc.getForm().getFields().every(f=>f.isReadOnly()));assert.equal(doc.getForm().getTextField('stunden').getText(),'3 Stunden');assert.equal(doc.getForm().getTextField('unterschrift_kunde').getText(),undefined);const unsigned=await PDFLib.PDFDocument.load(await pdf.build(options));assert.equal(unsigned.getForm().getTextField('kunde_name').isReadOnly(),false);await assert.rejects(pdf.build({...options,values:{...values,stunden:'4 Stunden'},signatures:{customer:ink(values)}}),/unterschreiben/);fs.mkdirSync(path.join(__dirname,'../tmp/pdfs'),{recursive:true});fs.writeFileSync(path.join(__dirname,'../tmp/pdfs/ad-signature-test.pdf'),signed)});
+function storeContext(){
+ const rows=new Map();let c;
+ const db={
+  createObjectStore(){return {createIndex(){}}},
+  transaction(){
+   const tx={abort(){tx.onabort?.()},objectStore(){
+    const request=action=>{const r={};queueMicrotask(()=>{try{r.result=action();r.onsuccess?.();tx.oncomplete?.()}catch{r.onerror?.();tx.onabort?.()}});return r};
+    return {get:id=>request(()=>rows.get(id)),put:record=>request(()=>{if(c.fail)throw Error('quota');rows.set(record.id,record);return record.id}),index:()=>({getAll:job=>request(()=>[...rows.values()].filter(r=>r.job===job))})};
+   }};return tx;
+  }
+ };
+ c={Promise,Error,indexedDB:{open(){const r={};queueMicrotask(()=>{r.result=db;r.onupgradeneeded?.();r.onsuccess?.()});return r}}};
+ vm.createContext(c);vm.runInContext(fs.readFileSync(path.join(__dirname,'../ad-local-store.js'),'utf8'),c);return {c,rows,store:c.MangoldAdStore};
+}
+test('local archive saves idempotently, returns only matching jobs and rejects a foreign lookup',async()=>{const {store,rows}=storeContext(),one={id:'same',job:'one',name:'AD.pdf',savedAt:'2026-10-27',signedRoles:['customer'],pdf:'test-bytes'};await store.save(one);await store.save({...one,savedAt:'2026-10-28'});await store.save({...one,id:'other',job:'two'});assert.equal(rows.size,2);assert.equal((await store.list('one')).length,1);assert.equal((await store.get('same','one')).savedAt,'2026-10-27');await assert.rejects(store.get('same','two'),/OTHER_JOB/)});
+test('a failed local write is rejected and never appears as a saved report',async()=>{const {store,rows,c}=storeContext();c.fail=true;await assert.rejects(store.save({id:'fail',job:'one'}),/LOCAL_STORE_FAILED/);assert.equal(rows.size,0)});

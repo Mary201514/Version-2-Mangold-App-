@@ -1,0 +1,42 @@
+Mangold App Version 2 – 27.10.2026
+
+Umgesetzt
+- In der Kontrolle hat jedes Berichtsfeld Diktieren und Schreiben. Der Cursor
+  und vorhandene Eingaben bleiben erhalten. Das Mikrofon wird über die
+  Gerätetastatur beziehungsweise Windows + H gestartet.
+- Die lokale deutsche Zuordnung erkennt auch Hinweg/Anfahrt, Rückweg/Rückfahrt,
+  Arbeiten und KM sowie aufeinanderfolgende Überschriften ohne Satzzeichen.
+  Unklare Zuordnungen bleiben bis zur Rückfrage unverändert. Nach Klärung
+  werden die sichtbaren Kontrollfelder sofort aktualisiert.
+- Aktuelle Berichtswerte und verfügbare Kundendaten befüllen die V4-AD-Vorlage.
+- Kunde und Monteur können mit Finger, Stift oder Maus zeichnen und ihre
+  Unterschrift ausdrücklich übernehmen. Änderungen an der unterschriebenen
+  Fassung erfordern erneutes Unterschreiben oder ausdrückliches Zurücknehmen.
+- Nachweis lokal speichern legt eine vollständige PDF im Browser ab.
+  Identische Fassungen erzeugen keine doppelten Einträge. Frühere PDF-Fassungen
+  bleiben erhalten. PDF für das Büro herunterladen löst keinen Versand aus.
+- PDF ohne Unterschriften bleibt beschreibbar; unterschriebene PDF-Felder sind
+  gegen gewöhnliche Formularbearbeitung gesperrt. Dies ist keine zertifizierte
+  digitale Signatur und kein kryptografischer Manipulationsschutz.
+
+Geprüft
+- 75 automatisierte Tests bestanden: Zuordnung, Korrekturen, Rückfragen,
+  Feldbearbeitung/Rückgängig, PDF-Felder, beide Unterschriftspositionen,
+  Versionsbindung, Speicherausfall, doppelte Speicherung und Auftragstrennung.
+- Original-PDF mit künstlichen Teststrichen gerendert und visuell geprüft.
+- Browser: Kontrollwerte und AD-Felder stimmen überein; nach Klärung einer
+  Rückfrage sind die Werte sofort sichtbar. Diktieren fokussiert das Zielfeld.
+- Bei gestopptem lokalen Server: Testunterschrift übernommen, PDF gespeichert,
+  erneut gespeichert, Seite neu geladen. Unterschrift und genau ein lokaler
+  PDF-Eintrag erhalten. Download und Sperre nach Änderung geprüft.
+
+Noch offen für Gerätetest und betrieblichen Einsatz
+- Echte Spracheingabe, Touch und Stift auf Lenovo/Android, Windows-Tablet und
+  iPad wurden nicht auf diesen Geräten geprüft. Offline-Spracherkennung hängt
+  von Tastatur, Betriebssystem und installierten Sprachpaketen ab.
+- App und Vorlagen zuerst online laden, bis Offline bereit angezeigt wird.
+- Browserdaten sind geräte- und browsergebunden. Löschen der Browserdaten kann
+  Entwürfe und lokale PDFs entfernen. Vor Weitergabe PDF herunterladen.
+- Keine neue KI-API, kein automatischer Büroversand, keine produktive ERP-Anbindung.
+- Zugriffsschutz, Aufbewahrung, Sicherung und Wiederherstellung müssen vor
+  echtem betrieblichem Einsatz festgelegt werden. Weiter künstliche Testdaten nutzen.
